@@ -6,11 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import jedrzejbronislaw.propcalc.lang.Internationalization;
 
 public class Main extends Application {
 
-	private static final String WINDOW_TITLE = "PropCalc";
-	
 	private Stage stage;
 	
 
@@ -29,7 +28,7 @@ public class Main extends Application {
 		stage.setScene(buildScene());
 		stage.setWidth(1000);
 		stage.setHeight(700);
-		stage.setTitle(WINDOW_TITLE);
+		stage.setTitle(Internationalization.get("window_title"));
 		stage.setOnCloseRequest(e -> {
 			Platform.exit();
 			System.exit(0);
@@ -39,7 +38,7 @@ public class Main extends Application {
 	}
 
 	private Scene buildScene() {
-		BorderPane pane = new BorderPane(new Label(WINDOW_TITLE));
+		BorderPane pane = new BorderPane(new Label(Internationalization.get("window_title")));
 		
 		return new Scene(pane);
 	}
