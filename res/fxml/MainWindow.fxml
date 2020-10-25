@@ -8,23 +8,23 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController">
+<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController">
    <children>
       <Label id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" text="%window_title">
          <VBox.margin>
             <Insets />
          </VBox.margin>
       </Label>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
           <Tab closable="false" text="%proportion_of_particles">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+                  <ScrollPane fx:id="particlesPane" />
                </content>
           </Tab>
-          <Tab closable="false" text="%percentage_of_the_total">
+          <Tab closable="false" disable="true" text="%percentage_of_the_total">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+                  <ScrollPane fx:id="totalPane" />
                </content>
           </Tab>
         </tabs>

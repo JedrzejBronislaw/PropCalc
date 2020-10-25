@@ -1,0 +1,13 @@
+package jedrzejbronislaw.propcalc.view.substancesSetting.item;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.Initializable;
+
+public class SubstancesSettingItemController implements Initializable {
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {}
+
+}

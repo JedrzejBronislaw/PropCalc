@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+
+<HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItemController">
+   <children>
+      <Label fx:id="nameLabel" text="Name:" />
+      <HBox alignment="CENTER">
+         <children>
+            <TextField prefWidth="100.0" />
+            <Label text="ml" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <Label fx:id="massLabel" text="0" />
+            <Label text="mg" />
+         </children>
+      </HBox>
+      <Label fx:id="quantityLabel" text="0" />
+   </children>
+</HBox>
