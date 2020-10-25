@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
+import jedrzejbronislaw.propcalc.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController;
@@ -74,6 +75,8 @@ public class ViewBuilder {
 		MyFXMLLoader<SubstancesSettingItemController> loader = new MyFXMLLoader<>();
 		NodeAndController<SubstancesSettingItemController> nac = loader.create("SubstancesSettingItem.fxml");
 
+		nac.getController().setSubstances(Substances.all());
+		
 		return nac.getNode();
 	}
 
