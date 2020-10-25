@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController">
+   <children>
+      <Label id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" text="%window_title">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="%proportion_of_particles">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+          </Tab>
+          <Tab closable="false" text="%percentage_of_the_total">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
