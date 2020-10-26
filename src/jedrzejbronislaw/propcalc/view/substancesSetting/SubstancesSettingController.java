@@ -16,11 +16,13 @@ public class SubstancesSettingController implements Initializable {
 	@FXML private VBox substanceBox;
 	@FXML private Button addButton;
 	
-	@Setter public Runnable addAction;
+	@Setter private Runnable addAction;
+	@Setter private Runnable onAddSubstance;
 	
 	
 	public void addItem(Node item) {
 		substanceBox.getChildren().add(item);
+		Injection.run(onAddSubstance);
 	}
 	
 	@Override

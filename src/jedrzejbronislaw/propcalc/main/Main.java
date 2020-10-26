@@ -2,6 +2,7 @@ package jedrzejbronislaw.propcalc.main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.view.ViewBuilder;
 
 public class Main extends Application {
@@ -17,7 +18,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
-		new ViewBuilder().build(stage);
+		new ViewBuilder(new Components()).build(stage);
 		stage.show();
 	}
 }

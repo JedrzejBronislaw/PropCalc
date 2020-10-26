@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
 import jedrzejbronislaw.propcalc.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
@@ -15,10 +16,14 @@ import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSettingControl
 import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItemController;
 import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolumeController;
 import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItemController;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class ViewBuilder {
 	
 	private static final String CSS_FILE_PATH = "application.css";
+	
+	private final Components components;
 	
 	
 	public void build(Stage stage) {
@@ -67,6 +72,7 @@ public class ViewBuilder {
 
 		SubstancesSettingController controller = nac.getController();
 		controller.setAddAction(() -> controller.addItem(substancesSettingItem()));
+		controller.setOnAddSubstance(() -> components.getSelectedSubstances().add(null));
 		
 		return nac.getNode();
 	}
@@ -85,10 +91,9 @@ public class ViewBuilder {
 		NodeAndController<SubstancesVolumeController> nac = loader.create("SubstancesVolume.fxml");
 
 		SubstancesVolumeController controller = nac.getController();
-		controller.addItem(substancesVolumeItem());
-		controller.addItem(substancesVolumeItem());
-		controller.addItem(substancesVolumeItem());
 		controller.setTotalPane(substancesVolumeItem());
+		
+		components.getSelectedSubstances().addAddListener(() -> controller.addItem(substancesVolumeItem()));
 		
 		return nac.getNode();
 	}
