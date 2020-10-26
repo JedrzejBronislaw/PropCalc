@@ -5,10 +5,10 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import jedrzejbronislaw.propcalc.tools.Injection;
+import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
 import lombok.Setter;
 
 public class SubstancesSettingController implements Initializable {
@@ -20,7 +20,7 @@ public class SubstancesSettingController implements Initializable {
 	@Setter private Runnable onAddSubstance;
 	
 	
-	public void addItem(Node item) {
+	public void addItem(SubstancesSettingItem item) {
 		substanceBox.getChildren().add(item);
 		Injection.run(onAddSubstance);
 	}

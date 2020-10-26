@@ -10,10 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import jedrzejbronislaw.propcalc.substances.Substance;
+import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 
-public class SubstancesSettingItemController implements Initializable {
+public class SubstancesSettingItem extends HBox implements Initializable {
 
 	@FXML private ComboBox<Substance> substanceBox;
 	
@@ -25,6 +27,10 @@ public class SubstancesSettingItemController implements Initializable {
 			substanceBox.getItems().clear();
 			substanceBox.getItems().addAll(substances);
 		});
+	}
+	
+	public SubstancesSettingItem() {
+		MyFXMLLoader.create("SubstancesSettingItem.fxml", this);
 	}
 	
 	@Override

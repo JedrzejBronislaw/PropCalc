@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.HBox?>
 
 
-<HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItemController">
+<fx:root alignment="CENTER" type="HBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
    <children>
       <ComboBox fx:id="substanceBox" prefWidth="150.0" />
       <Label text="1 mg/ml" />
       <TextField />
    </children>
-</HBox>
+</fx:root>

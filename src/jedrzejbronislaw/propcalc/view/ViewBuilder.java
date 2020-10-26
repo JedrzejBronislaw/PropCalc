@@ -13,7 +13,7 @@ import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController;
 import jedrzejbronislaw.propcalc.view.particulatesUnit.ParticulatesUnitController;
 import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSettingController;
-import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItemController;
+import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
 import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolumeController;
 import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItemController;
 import lombok.RequiredArgsConstructor;
@@ -77,13 +77,11 @@ public class ViewBuilder {
 		return nac.getNode();
 	}
 
-	private Node substancesSettingItem() {
-		MyFXMLLoader<SubstancesSettingItemController> loader = new MyFXMLLoader<>();
-		NodeAndController<SubstancesSettingItemController> nac = loader.create("SubstancesSettingItem.fxml");
-
-		nac.getController().setSubstances(Substances.all());
+	private SubstancesSettingItem substancesSettingItem() {
+		SubstancesSettingItem item = new SubstancesSettingItem();
+		item.setSubstances(Substances.all());
 		
-		return nac.getNode();
+		return item;
 	}
 
 	private Node substancesVolume() {
