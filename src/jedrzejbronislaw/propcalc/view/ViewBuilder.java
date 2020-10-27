@@ -12,9 +12,9 @@ import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController;
 import jedrzejbronislaw.propcalc.view.particulatesUnit.ParticulatesUnitController;
-import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSettingController;
+import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSetting;
 import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
-import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolumeController;
+import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolume;
 import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItem;
 import lombok.RequiredArgsConstructor;
 
@@ -67,14 +67,12 @@ public class ViewBuilder {
 	}
 
 	private Node substancesSetting() {
-		MyFXMLLoader<SubstancesSettingController> loader = new MyFXMLLoader<>();
-		NodeAndController<SubstancesSettingController> nac = loader.create("SubstancesSetting.fxml");
-
-		SubstancesSettingController controller = nac.getController();
-		controller.setAddAction(() -> controller.addItem(substancesSettingItem()));
-		controller.setOnAddSubstance(() -> components.getSelectedSubstances().add(null));
+		SubstancesSetting substancesSetting = new SubstancesSetting();
 		
-		return nac.getNode();
+		substancesSetting.setAddAction(() -> substancesSetting.addItem(substancesSettingItem()));
+		substancesSetting.setOnAddSubstance(() -> components.getSelectedSubstances().add(null));
+		
+		return substancesSetting;
 	}
 
 	private SubstancesSettingItem substancesSettingItem() {
@@ -85,15 +83,13 @@ public class ViewBuilder {
 	}
 
 	private Node substancesVolume() {
-		MyFXMLLoader<SubstancesVolumeController> loader = new MyFXMLLoader<>();
-		NodeAndController<SubstancesVolumeController> nac = loader.create("SubstancesVolume.fxml");
+		SubstancesVolume substancesVolume = new SubstancesVolume();
 
-		SubstancesVolumeController controller = nac.getController();
-		controller.setTotalPane(substancesVolumeItem());
+		substancesVolume.setTotalPane(substancesVolumeItem());
 		
-		components.getSelectedSubstances().addAddListener(() -> controller.addItem(substancesVolumeItem()));
+		components.getSelectedSubstances().addAddListener(() -> substancesVolume.addItem(substancesVolumeItem()));
 		
-		return nac.getNode();
+		return substancesVolume;
 	}
 
 	private SubstancesVolumeItem substancesVolumeItem() {
