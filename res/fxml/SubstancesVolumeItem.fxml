@@ -4,8 +4,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 
-
-<HBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItemController">
+<fx:root alignment="CENTER" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="nameLabel" text="Name:" />
       <HBox alignment="CENTER">
@@ -22,4 +21,4 @@
       </HBox>
       <Label fx:id="quantityLabel" text="0" />
    </children>
-</HBox>
+</fx:root>

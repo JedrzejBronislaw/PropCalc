@@ -15,7 +15,7 @@ import jedrzejbronislaw.propcalc.view.particulatesUnit.ParticulatesUnitControlle
 import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSettingController;
 import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
 import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolumeController;
-import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItemController;
+import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItem;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -96,10 +96,7 @@ public class ViewBuilder {
 		return nac.getNode();
 	}
 
-	private Node substancesVolumeItem() {
-		MyFXMLLoader<SubstancesVolumeItemController> loader = new MyFXMLLoader<>();
-		NodeAndController<SubstancesVolumeItemController> nac = loader.create("SubstancesVolumeItem.fxml");
-
-		return nac.getNode();
+	private SubstancesVolumeItem substancesVolumeItem() {
+		return new SubstancesVolumeItem();
 	}
 }
