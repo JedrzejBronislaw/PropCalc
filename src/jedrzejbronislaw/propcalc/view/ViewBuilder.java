@@ -70,19 +70,15 @@ public class ViewBuilder {
 	private Node substancesSetting() {
 		SubstancesSetting substancesSetting = new SubstancesSetting();
 
-		components.getMixture().addAddListener(() -> substancesSetting.addItem(substancesSettingItem()));
+		components.getMixture().addAddListener(solution -> substancesSetting.addItem(substancesSettingItem(solution)));
 		
-		substancesSetting.setAddAction(() -> components.getMixture().addSolution(createSolution()));
+		substancesSetting.setAddAction(() -> components.getMixture().addSolution(new Solution()));
 		
 		return substancesSetting;
 	}
-	
-	private Solution createSolution() {
-		return new Solution();
-	}
 
-	private SubstancesSettingItem substancesSettingItem() {
-		SubstancesSettingItem item = new SubstancesSettingItem();
+	private SubstancesSettingItem substancesSettingItem(Solution solution) {
+		SubstancesSettingItem item = new SubstancesSettingItem(solution);
 		item.setSubstances(Substances.all());
 		
 		return item;
@@ -91,14 +87,14 @@ public class ViewBuilder {
 	private Node substancesVolume() {
 		SubstancesVolume substancesVolume = new SubstancesVolume();
 
-		substancesVolume.setTotalPane(substancesVolumeItem());
+		substancesVolume.setTotalPane(substancesVolumeItem(null));
 		
-		components.getMixture().addAddListener(() -> substancesVolume.addItem(substancesVolumeItem()));
+		components.getMixture().addAddListener(solution -> substancesVolume.addItem(substancesVolumeItem(solution)));
 		
 		return substancesVolume;
 	}
 
-	private SubstancesVolumeItem substancesVolumeItem() {
-		return new SubstancesVolumeItem();
+	private SubstancesVolumeItem substancesVolumeItem(Solution solution) {
+		return new SubstancesVolumeItem(solution);
 	}
 }

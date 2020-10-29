@@ -12,6 +12,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import jedrzejbronislaw.propcalc.model.Solution;
 import jedrzejbronislaw.propcalc.substances.Substance;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 
@@ -21,6 +22,8 @@ public class SubstancesSettingItem extends HBox implements Initializable {
 	
 	private Callback<ListView<Substance>, ListCell<Substance>> substanceCellFactory = new SubstanceCellFactory();
 	
+	private final Solution solution;
+	
 	
 	public void setSubstances(List<Substance> substances) {
 		Platform.runLater(() -> {
@@ -29,7 +32,8 @@ public class SubstancesSettingItem extends HBox implements Initializable {
 		});
 	}
 	
-	public SubstancesSettingItem() {
+	public SubstancesSettingItem(Solution solution) {
+		this.solution = solution;
 		MyFXMLLoader.create("SubstancesSettingItem.fxml", this);
 	}
 	
@@ -38,6 +42,7 @@ public class SubstancesSettingItem extends HBox implements Initializable {
 		
 		substanceBox.setCellFactory(substanceCellFactory);
 		substanceBox.setButtonCell(substanceCellFactory.call(null));
+		substanceBox.setOnAction(e -> solution.setSubstance(substanceBox.getValue()));
 	}
 
 }
