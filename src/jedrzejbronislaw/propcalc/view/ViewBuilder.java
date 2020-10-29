@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
+import jedrzejbronislaw.propcalc.model.Solution;
 import jedrzejbronislaw.propcalc.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
@@ -68,11 +69,16 @@ public class ViewBuilder {
 
 	private Node substancesSetting() {
 		SubstancesSetting substancesSetting = new SubstancesSetting();
+
+		components.getMixture().addAddListener(() -> substancesSetting.addItem(substancesSettingItem()));
 		
-		substancesSetting.setAddAction(() -> substancesSetting.addItem(substancesSettingItem()));
-		substancesSetting.setOnAddSubstance(() -> components.getSelectedSubstances().add(null));
+		substancesSetting.setAddAction(() -> components.getMixture().addSolution(createSolution()));
 		
 		return substancesSetting;
+	}
+	
+	private Solution createSolution() {
+		return new Solution();
 	}
 
 	private SubstancesSettingItem substancesSettingItem() {
@@ -87,7 +93,7 @@ public class ViewBuilder {
 
 		substancesVolume.setTotalPane(substancesVolumeItem());
 		
-		components.getSelectedSubstances().addAddListener(() -> substancesVolume.addItem(substancesVolumeItem()));
+		components.getMixture().addAddListener(() -> substancesVolume.addItem(substancesVolumeItem()));
 		
 		return substancesVolume;
 	}

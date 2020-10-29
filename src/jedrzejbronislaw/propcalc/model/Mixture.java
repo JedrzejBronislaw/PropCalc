@@ -1,20 +1,19 @@
-package jedrzejbronislaw.propcalc.components;
+package jedrzejbronislaw.propcalc.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jedrzejbronislaw.propcalc.substances.Substance;
+public class Mixture {
 
-public class SelectedSubstances {
-
-	private List<Substance> substances = new ArrayList<>();
+	private List<Solution> solutions = new ArrayList<>();
 	private List<Runnable> addListeners = new ArrayList<>();
 	
 	
-	public void add(Substance substance) {
-		substances.add(substance);
+	public void addSolution(Solution solution) {
+		solutions.add(solution);
 		callAddListeners();
 	}
+
 
 	public void addAddListener(Runnable listener) {
 		addListeners.add(listener);

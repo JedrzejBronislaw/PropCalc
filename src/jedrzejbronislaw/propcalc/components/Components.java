@@ -1,8 +1,9 @@
 package jedrzejbronislaw.propcalc.components;
 
+import jedrzejbronislaw.propcalc.model.Mixture;
 import lombok.Getter;
 
 public class Components {
 
-	@Getter SelectedSubstances selectedSubstances = new SelectedSubstances();
+	@Getter Mixture mixture = new Mixture();
 }
