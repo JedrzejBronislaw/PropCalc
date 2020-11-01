@@ -46,14 +46,14 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 		return solution.getSubstance();
 	}
 
-	private void validateVolumeField(String newV, String oldV) {
+	protected void validateVolumeField(String newV, String oldV) {
 		if (newV.isEmpty()) return;
 		
 		if (!newV.matches("[0-9]+(\\.[0-9]*)?"))
 			volumeField.setText(oldV);
 	}
 	
-	private void setSolutionVolume() {
+	protected void setSolutionVolume() {
 		if (solution != null) {
 			double volume;
 			

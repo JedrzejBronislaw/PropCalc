@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItem;
+import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeTotal;
 
 public class SubstancesVolume extends VBox implements Initializable {
 
@@ -25,9 +26,9 @@ public class SubstancesVolume extends VBox implements Initializable {
 		MyFXMLLoader.create("SubstancesVolume.fxml", this);
 	}
 	
-	public void setTotalPane(SubstancesVolumeItem item) {
+	public void setTotalPane(SubstancesVolumeTotal totalItem) {
 		totalPane.getChildren().clear();
-		totalPane.getChildren().add(item);
+		totalPane.getChildren().add(totalItem);
 	}
 
 	@Override

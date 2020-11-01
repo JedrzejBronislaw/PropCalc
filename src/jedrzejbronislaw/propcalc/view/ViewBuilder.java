@@ -17,6 +17,7 @@ import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSetting;
 import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
 import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolume;
 import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItem;
+import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeTotal;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -86,10 +87,12 @@ public class ViewBuilder {
 
 	private Node substancesVolume() {
 		SubstancesVolume substancesVolume = new SubstancesVolume();
+		SubstancesVolumeTotal totalItem = new SubstancesVolumeTotal();
 
-		substancesVolume.setTotalPane(substancesVolumeItem(null));
+		substancesVolume.setTotalPane(totalItem);
 		
 		components.getMixture().addAddListener(solution -> substancesVolume.addItem(substancesVolumeItem(solution)));
+		components.getMixture().addAddListener(totalItem::addSolution);
 		
 		return substancesVolume;
 	}
