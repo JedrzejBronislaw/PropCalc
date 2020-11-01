@@ -9,7 +9,7 @@
       <Label fx:id="nameLabel" text="Name:" />
       <HBox alignment="CENTER">
          <children>
-            <TextField prefWidth="100.0" />
+            <TextField fx:id="volumeField" prefWidth="100.0" />
             <Label text="ml" />
          </children>
       </HBox>

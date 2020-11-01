@@ -10,7 +10,7 @@ import lombok.Getter;
 public class Solution {
 	
 	private Substance substance;
-	private double concentration;
+	private double concentration = 1;
 	private int proportion;
 	
 	private double volume;

@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import jedrzejbronislaw.propcalc.model.Solution;
@@ -19,6 +20,7 @@ import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 public class SubstancesSettingItem extends HBox implements Initializable {
 
 	@FXML private ComboBox<Substance> substanceBox;
+	@FXML private TextField proportionField;
 	
 	private Callback<ListView<Substance>, ListCell<Substance>> substanceCellFactory = new SubstanceCellFactory();
 	
@@ -43,6 +45,29 @@ public class SubstancesSettingItem extends HBox implements Initializable {
 		substanceBox.setCellFactory(substanceCellFactory);
 		substanceBox.setButtonCell(substanceCellFactory.call(null));
 		substanceBox.setOnAction(e -> solution.setSubstance(substanceBox.getValue()));
+		
+		proportionField.textProperty().addListener((o, oldV, newV) -> {
+			validateVolumeField(newV);
+			setSolutionProportion();
+		});
 	}
-
+	
+	private void validateVolumeField(String newV) {
+		if (!newV.matches("[0-9]*"))
+			proportionField.setText(newV.replaceAll("[^0-9]", ""));
+	}
+	
+	private void setSolutionProportion() {
+		if (solution != null) {
+			int proportion;
+			
+			try {
+				proportion = Integer.parseInt(proportionField.getText());
+			} catch (NumberFormatException e) {
+				proportion = 0;
+			}
+			
+			solution.setProportion(proportion);
+		}
+	}
 }
