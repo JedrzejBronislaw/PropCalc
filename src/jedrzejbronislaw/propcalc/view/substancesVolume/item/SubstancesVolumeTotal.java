@@ -5,19 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import jedrzejbronislaw.propcalc.model.Solution;
 
 public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 
 	private static final String NAME_LABEL = "TOTAL:";
-	
-	@FXML private Label nameLabel;
-	@FXML private TextField volumeField;
-	@FXML private Label massLabel;
-	@FXML private Label quantityLabel;
 	
 	private final List<Solution> solutions = new ArrayList<>();
 	
@@ -32,17 +24,17 @@ public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 	}
 	
 	private void update() {
-		double vol = 0, mass = 0, number = 0;
+		double volume = 0, mass = 0, number = 0;
 		
 		for(Solution solution : solutions) {
-			vol    += solution.getVolume();
+			volume += solution.getVolume();
 			mass   += solution.massOfSubstance();
 			number += solution.numberOfMolecules();
 		}
 		
-		volumeField.setText(Double.toString(vol));
-		massLabel.setText(Double.toString(mass));
-		quantityLabel.setText(Double.toString(number));
+		displayVolume(volume);
+		displayMassOfSubstance(mass);
+		displayNumOfMolecules(number);
 	}
 	
 	@Override

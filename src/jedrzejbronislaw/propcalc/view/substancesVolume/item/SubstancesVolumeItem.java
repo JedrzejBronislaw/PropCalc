@@ -1,6 +1,7 @@
 package jedrzejbronislaw.propcalc.view.substancesVolume.item;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -14,10 +15,12 @@ import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 
 public class SubstancesVolumeItem extends HBox implements Initializable {
 
-	@FXML private Label nameLabel;
-	@FXML private TextField volumeField;
-	@FXML private Label massLabel;
-	@FXML private Label quantityLabel;
+	private static final DecimalFormat numberOfMoleculesFormat = new DecimalFormat("#.###E0");
+	
+	@FXML protected Label nameLabel;
+	@FXML protected TextField volumeField;
+	@FXML protected Label massLabel;
+	@FXML protected Label quantityLabel;
 	
 	private final Solution solution;
 	
@@ -31,15 +34,27 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		if (solution != null)
 			solution.addChangeListener(() -> {
-				nameLabel.setText(substace() != null ? substace().getName() : "");
-				massLabel.setText(Double.toString(solution.massOfSubstance()));
-				quantityLabel.setText(Double.toString(solution.numberOfMolecules()));
+				nameLabel.setText(substace() != null ? substace().getName()+":" : "");
+				displayMassOfSubstance(solution.massOfSubstance());
+				displayNumOfMolecules(solution.numberOfMolecules());
 			});
 		
 		volumeField.textProperty().addListener((o, oldV, newV) -> {
 			validateVolumeField(newV, oldV);
 			setSolutionVolume();
 		});
+	}
+
+	protected void displayVolume(double value) {
+		volumeField.setText(Double.toString(value));
+	}
+
+	protected void displayMassOfSubstance(double value) {
+		massLabel.setText(Double.toString(value));
+	}
+
+	protected void displayNumOfMolecules(double value) {
+		quantityLabel.setText(numberOfMoleculesFormat.format(value));
 	}
 
 	private Substance substace() {
