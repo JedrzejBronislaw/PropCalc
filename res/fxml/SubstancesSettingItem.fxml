@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" styleClass="item" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ComboBox fx:id="substanceBox" prefWidth="150.0" />
-      <Label text="1 mg/ml" />
-      <TextField fx:id="proportionField" />
+      <ComboBox fx:id="substanceBox" prefWidth="250.0" />
+      <Label alignment="CENTER_RIGHT" prefWidth="100.0" text="1 mg/ml" textAlignment="RIGHT" />
+      <TextField fx:id="proportionField" alignment="CENTER_RIGHT" prefWidth="65.0" />
    </children>
 </fx:root>

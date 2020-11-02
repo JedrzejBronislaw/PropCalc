@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <fx:root type="VBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="%volumes_" />
-      <VBox fx:id="substanceBox" fillWidth="false" />
-      <Pane fx:id="totalPane" prefHeight="200.0" prefWidth="200.0" />
+      <Label styleClass="subtitle" text="%volumes_" />
+      <HBox styleClass="item">
+         <children>
+            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="%name_of_substance" textAlignment="RIGHT" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="%volume_of_solution" textAlignment="RIGHT" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="%mass_of_substance" textAlignment="RIGHT" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="%number_of_molecules" textAlignment="RIGHT" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox fx:id="substanceBox" fillWidth="false" spacing="2.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin></VBox>
+      <Pane fx:id="totalPane" />
    </children>
 </fx:root>

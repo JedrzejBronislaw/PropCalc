@@ -1,5 +1,19 @@
 #title {
-	-fx-font-size: 17px;;
-    -fx-font-weight: bold;
-    -fx-text-fill: #218ee4;
+	-fx-font-size: 17px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #218ee4;
+}
+
+.subtitle {
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #218ee4;
+}
+
+.item {
+	-fx-spacing: 15;
+}
+
+.valueUnit{
+	-fx-spacing: 3;
 }

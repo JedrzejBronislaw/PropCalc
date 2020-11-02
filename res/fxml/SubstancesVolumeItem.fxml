@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" styleClass="item" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="nameLabel" text="Name:" />
-      <HBox alignment="CENTER">
+      <Label fx:id="nameLabel" alignment="CENTER_RIGHT" prefWidth="100.0" text="Name:">
+         <styleClass>
+            <String fx:value="itemValue" />
+            <String fx:value="substanceName" />
+         </styleClass></Label>
+      <HBox alignment="CENTER" prefWidth="100.0" styleClass="valueUnit">
          <children>
-            <TextField fx:id="volumeField" prefWidth="100.0" />
-            <Label text="ml" />
+            <TextField fx:id="volumeField" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" styleClass="solutionVolume" />
+            <Label minWidth="-Infinity" text="ml" />
          </children>
       </HBox>
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" prefWidth="100.0" styleClass="valueUnit">
          <children>
-            <Label fx:id="massLabel" text="0" />
-            <Label text="mg" />
+            <Label fx:id="massLabel" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" styleClass="itemValue" text="0" textAlignment="RIGHT" HBox.hgrow="ALWAYS" />
+            <Label minWidth="-Infinity" text="mg" />
          </children>
       </HBox>
-      <Label fx:id="quantityLabel" text="0" />
+      <Label fx:id="quantityLabel" alignment="CENTER_RIGHT" prefWidth="100.0" styleClass="itemValue" text="0" />
    </children>
 </fx:root>
