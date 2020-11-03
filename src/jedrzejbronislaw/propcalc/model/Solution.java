@@ -16,6 +16,10 @@ public class Solution {
 	private double volume;
 	
 	private List<Runnable> changeListeners = new ArrayList<>();
+	private List<Runnable> changeSubstanceListeners = new ArrayList<>();
+	private List<Runnable> changeConcentrationListeners = new ArrayList<>();
+	private List<Runnable> changeProportionListeners = new ArrayList<>();
+	private List<Runnable> changeVolumeListeners = new ArrayList<>();
 	
 	
 	public double massOfSubstance() {
@@ -33,21 +37,25 @@ public class Solution {
 	
 	public void setSubstance(Substance substance) {
 		this.substance = substance;
+		callChangeSubstanceListeners();
 		callChangeListeners();
 	}
 	
 	public void setConcentration(double concentration) {
 		this.concentration = concentration;
+		callChangeConcentrationListeners();
 		callChangeListeners();
 	}
 	
 	public void setProportion(int proportion) {
 		this.proportion = proportion;
+		callChangeProportionListeners();
 		callChangeListeners();
 	}
 	
 	public void setVolume(double volume) {
 		this.volume = volume;
+		callChangeVolumeListeners();
 		callChangeListeners();
 	}
 	
@@ -57,8 +65,35 @@ public class Solution {
 	public void addChangeListener(Runnable listener) {
 		changeListeners.add(listener);
 	}
-	
 	private void callChangeListeners() {
 		changeListeners.forEach(l ->  l.run());
+	}
+	
+	public void addChangeSubstanceListener(Runnable listener) {
+		changeSubstanceListeners.add(listener);
+	}
+	private void callChangeSubstanceListeners() {
+		changeSubstanceListeners.forEach(l ->  l.run());
+	}
+	
+	public void addChangeConcentrationListener(Runnable listener) {
+		changeConcentrationListeners.add(listener);
+	}
+	private void callChangeConcentrationListeners() {
+		changeConcentrationListeners.forEach(l ->  l.run());
+	}
+	
+	public void addChangeProportionListener(Runnable listener) {
+		changeProportionListeners.add(listener);
+	}
+	private void callChangeProportionListeners() {
+		changeProportionListeners.forEach(l ->  l.run());
+	}
+	
+	public void addChangeVolumeListener(Runnable listener) {
+		changeVolumeListeners.add(listener);
+	}
+	private void callChangeVolumeListeners() {
+		changeVolumeListeners.forEach(l ->  l.run());
 	}
 }
