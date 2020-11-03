@@ -24,14 +24,19 @@ public class Solution {
 	
 	public double massOfSubstance() {
 		return volume * concentration;
-	};
+	}
 	
 	public double numberOfMolecules() {
 		if (substance == null) return 0;
 		
 		return massOfSubstance() / substance.getMolarMass() * Consts.AVOGADRO;
-	};
+	}
 	
+	public double proportionOfVolume() {
+		if (substance == null) return 0;
+		
+		return proportion * substance.getMolarMass() / concentration;
+	}
 	
 	//setters
 	
@@ -57,6 +62,14 @@ public class Solution {
 		this.volume = volume;
 		callChangeVolumeListeners();
 		callChangeListeners();
+	}
+	
+	
+	public void setVolumeForNumOfMolecules(double numOfMolecules) {
+		if (substance == null) setVolume(0);
+		
+		double volume = (numOfMolecules * substance.getMolarMass()) / (concentration * Consts.AVOGADRO);
+		setVolume(volume);
 	}
 	
 	

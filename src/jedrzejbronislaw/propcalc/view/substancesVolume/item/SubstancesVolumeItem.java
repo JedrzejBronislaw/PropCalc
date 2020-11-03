@@ -35,6 +35,7 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 		if (solution != null)
 			solution.addChangeListener(() -> {
 				nameLabel.setText(substace() != null ? substace().getName()+":" : "");
+				displayVolume(solution.getVolume());
 				displayMassOfSubstance(solution.massOfSubstance());
 				displayNumOfMolecules(solution.numberOfMolecules());
 			});
