@@ -29,7 +29,11 @@ public class Solution {
 	public double numberOfMolecules() {
 		if (substance == null) return 0;
 		
-		return massOfSubstance() / substance.getMolarMass() * Consts.AVOGADRO;
+		return massOfSubstance() / molarMassInMgPerMol() * Consts.AVOGADRO;
+	}
+
+	private double molarMassInMgPerMol() {
+		return substance.getMolarMass() * 1000.0;
 	}
 	
 	public double proportionOfVolume() {
