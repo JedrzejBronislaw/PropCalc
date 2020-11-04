@@ -29,23 +29,28 @@ public class Mixture {
 		addListeners.forEach(l ->  l.accept(newSolution));
 	}
 	
+	
 	private void updateVolumes() {
+		if (updating) return;
+		
+		updateVolumes(volumeSum());
+	}
+	
+	public void updateVolumes(double totalVolume) {
 		if (updating) return;
 		
 		updating = true;
 		
-		double volumeSum = volumeSum();
 		double proportionVolumesSum = proportionVolumesSum();
 		
 		for (Solution solution : solutions) {
 			if (solution.getSubstance() == null) continue;
 			
-			solution.setVolume(solution.proportionOfVolume() / proportionVolumesSum * volumeSum);
+			solution.setVolume(solution.proportionOfVolume() / proportionVolumesSum * totalVolume);
 		}
 		
 		updating = false;
 	}
-
 
 	private void updateVolumes(Solution changedSolution) {
 		if (updating) return;

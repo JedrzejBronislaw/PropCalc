@@ -4,14 +4,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import jedrzejbronislaw.propcalc.model.Solution;
+import jedrzejbronislaw.propcalc.tools.Injection;
+import lombok.Setter;
 
 public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 
 	private static final String NAME_LABEL = "TOTAL:";
 	
 	private final List<Solution> solutions = new ArrayList<>();
+	@Setter
+	private Consumer<Double> onVolumeChange;
 	
 	
 	public SubstancesVolumeTotal() {
@@ -43,6 +48,7 @@ public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 		
 		volumeField.textProperty().addListener((o, oldV, newV) -> {
 			validateVolumeField(newV, oldV);
+			Injection.run(onVolumeChange, Double.parseDouble(volumeField.getText()));
 		});
 	}
 }

@@ -89,6 +89,8 @@ public class ViewBuilder {
 		SubstancesVolume substancesVolume = new SubstancesVolume();
 		SubstancesVolumeTotal totalItem = new SubstancesVolumeTotal();
 
+		totalItem.setOnVolumeChange(components.getMixture()::updateVolumes);
+		
 		substancesVolume.setTotalPane(totalItem);
 		
 		components.getMixture().addAddListener(solution -> substancesVolume.addItem(substancesVolumeItem(solution)));
