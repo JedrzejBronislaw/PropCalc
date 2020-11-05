@@ -47,8 +47,10 @@ public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 		nameLabel.setText(NAME_LABEL);
 		
 		volumeField.textProperty().addListener((o, oldV, newV) -> {
-			validateVolumeField(newV, oldV);
-			Injection.run(onVolumeChange, Double.parseDouble(volumeField.getText()));
+			if (internalChange) return;
+			
+			if (isNewVolumeValue(newV, oldV))
+				Injection.run(onVolumeChange, getDoubleVolume());
 		});
 	}
 }

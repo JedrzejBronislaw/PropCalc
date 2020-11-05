@@ -39,9 +39,10 @@ public class Mixture {
 	public void updateVolumes(double totalVolume) {
 		if (updating) return;
 		
-		updating = true;
-		
 		double proportionVolumesSum = proportionVolumesSum();
+		if (proportionVolumesSum == 0) return;
+		
+		updating = true;
 		
 		for (Solution solution : solutions) {
 			if (solution.getSubstance() == null) continue;
@@ -56,9 +57,10 @@ public class Mixture {
 		if (updating) return;
 		if (changedSolution.getSubstance() == null) return;
 		
-		updating = true;
-		
 		double xB = changedSolution.getProportion() * changedSolution.getSubstance().getMolarMass();
+		if (xB == 0) return;
+		
+		updating = true;
 		
 		for (Solution solution : solutions) {
 			if (solution == changedSolution) continue;

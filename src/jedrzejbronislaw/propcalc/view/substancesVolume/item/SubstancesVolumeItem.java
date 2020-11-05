@@ -4,6 +4,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import jedrzejbronislaw.propcalc.model.Solution;
 import jedrzejbronislaw.propcalc.substances.Substance;
+import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 
 public class SubstancesVolumeItem extends HBox implements Initializable {
@@ -24,6 +26,7 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 	
 	private final Solution solution;
 	
+	protected boolean internalChange = false;
 	
 	public SubstancesVolumeItem(Solution solution) {
 		this.solution = solution;
@@ -41,45 +44,78 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 			});
 		
 		volumeField.textProperty().addListener((o, oldV, newV) -> {
-			validateVolumeField(newV, oldV);
-			setSolutionVolume();
+			if (internalChange) return;
+			
+			if (isNewVolumeValue(newV, oldV))
+				setSolutionVolume();
+		});
+	}
+	
+	private void internalFXChange(Runnable change) {
+		Platform.runLater(() -> {
+			internalChange = true;
+			Injection.run(change);
+			internalChange = false;
 		});
 	}
 
 	protected void displayVolume(double value) {
-		volumeField.setText(Double.toString(value));
+		displayVolume(Double.toString(value));
+	}
+
+	private void displayVolume(String volumeStr) {
+		internalFXChange(() ->
+			volumeField.setText(volumeStr)
+		);
 	}
 
 	protected void displayMassOfSubstance(double value) {
-		massLabel.setText(Double.toString(value));
+		internalFXChange(() ->
+			massLabel.setText(Double.toString(value))
+		);
 	}
 
 	protected void displayNumOfMolecules(double value) {
-		quantityLabel.setText(numberOfMoleculesFormat.format(value));
+		internalFXChange(() ->
+			quantityLabel.setText(numberOfMoleculesFormat.format(value))
+		);
 	}
 
 	private Substance substace() {
 		return solution.getSubstance();
 	}
 
-	protected void validateVolumeField(String newV, String oldV) {
-		if (newV.isEmpty()) return;
+	protected boolean isNewVolumeValue(String newV, String oldV) {
+		if (correctVolumeValue(newV))  return true;
 		
-		if (!newV.matches("[0-9]+(\\.[0-9]*)?"))
-			volumeField.setText(oldV);
+		displayVolume(oldV);
+		return false;
+	}
+	
+	private boolean correctVolumeValue(String value) {
+		if (value.isEmpty()) return true;
+		
+		if (solution != null && solution.getProportion() == 0)
+			return false;
+		
+		if (!value.matches("[0-9]+(\\.[0-9]*)?"))
+			return false;
+
+		return true;
 	}
 	
 	protected void setSolutionVolume() {
-		if (solution != null) {
-			double volume;
-			
-			try {
-				volume = Double.parseDouble(volumeField.getText());
-			} catch (NumberFormatException e) {
-				volume = 0;
-			}
-			
-			solution.setVolume(volume);
+		if (solution != null)
+			solution.setVolume(getDoubleVolume());
+	}
+	
+	protected Double getDoubleVolume() {
+		if (volumeField.getText().isBlank()) return 0.0;
+		
+		try {
+			return Double.parseDouble(volumeField.getText());
+		} catch (NumberFormatException e) {
+			return null;
 		}
 	}
 }
