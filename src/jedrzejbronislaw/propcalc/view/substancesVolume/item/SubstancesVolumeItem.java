@@ -64,9 +64,13 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 	}
 
 	private void displayVolume(String volumeStr) {
-		internalFXChange(() ->
-			volumeField.setText(volumeStr)
-		);
+		internalFXChange(() -> {
+			int caret = volumeField.getCaretPosition();
+			
+			volumeField.setText(volumeStr);
+			
+			volumeField.positionCaret(caret);
+		});
 	}
 
 	protected void displayMassOfSubstance(double value) {
