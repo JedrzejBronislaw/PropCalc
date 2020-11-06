@@ -44,6 +44,7 @@ public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		setToolTips();
 		nameLabel.setText(NAME_LABEL);
 		
 		volumeField.textProperty().addListener((o, oldV, newV) -> {

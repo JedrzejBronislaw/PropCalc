@@ -14,7 +14,7 @@
          </styleClass></Label>
       <HBox alignment="CENTER" prefWidth="100.0" styleClass="valueUnit">
          <children>
-            <TextField fx:id="volumeField" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" styleClass="solutionVolume" />
+            <TextField fx:id="volumeField" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" promptText="0" styleClass="solutionVolume" />
             <Label minWidth="-Infinity" text="ml" />
          </children>
       </HBox>

@@ -7,8 +7,10 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import jedrzejbronislaw.propcalc.model.Solution;
 import jedrzejbronislaw.propcalc.substances.Substance;
@@ -17,12 +19,18 @@ import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 
 public class SubstancesVolumeItem extends HBox implements Initializable {
 
+	private static final DecimalFormat massOfSubstanceFormat = new DecimalFormat("#.###");
 	private static final DecimalFormat numberOfMoleculesFormat = new DecimalFormat("#.###E0");
 	
 	@FXML protected Label nameLabel;
 	@FXML protected TextField volumeField;
 	@FXML protected Label massLabel;
 	@FXML protected Label quantityLabel;
+
+	private Tooltip nameTip = new Tooltip();
+	private Tooltip volumeTip = new Tooltip();
+	private Tooltip massTip = new Tooltip();
+	private Tooltip quantityTip = new Tooltip();
 	
 	private final Solution solution;
 	
@@ -35,9 +43,11 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		setToolTips();
+		
 		if (solution != null)
 			solution.addChangeListener(() -> {
-				nameLabel.setText(substace() != null ? substace().getName()+":" : "");
+				displayName(substace());
 				displayVolume(solution.getVolume());
 				displayMassOfSubstance(solution.massOfSubstance());
 				displayNumOfMolecules(solution.numberOfMolecules());
@@ -50,12 +60,31 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 				setSolutionVolume();
 		});
 	}
+
+	protected void setToolTips() {
+		volumeField.setTooltip(volumeTip);
+		massLabel.setTooltip(massTip);
+		quantityLabel.setTooltip(quantityTip);
+	}
 	
 	private void internalFXChange(Runnable change) {
 		Platform.runLater(() -> {
 			internalChange = true;
 			Injection.run(change);
 			internalChange = false;
+		});
+	}
+
+	private void displayName(Substance substance) {
+		internalFXChange(() -> {
+			if (substance != null) {
+				nameLabel.setText(substance.getName()+":");
+				nameLabel.setTooltip(nameTip);
+				nameTip.setText(substance.getFullName() + " (" + substance.getFormula() + ")");
+			} else {
+				nameLabel.setText("");
+				nameLabel.setTooltip(null);
+			}
 		});
 	}
 
@@ -68,21 +97,24 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 			int caret = volumeField.getCaretPosition();
 			
 			volumeField.setText(volumeStr);
+			volumeTip.setText(volumeStr);
 			
 			volumeField.positionCaret(caret);
 		});
 	}
 
 	protected void displayMassOfSubstance(double value) {
-		internalFXChange(() ->
-			massLabel.setText(Double.toString(value))
-		);
+		internalFXChange(() -> {
+			massLabel.setText(massOfSubstanceFormat.format(value));
+			massTip.setText(Double.toString(value));
+		});
 	}
 
 	protected void displayNumOfMolecules(double value) {
-		internalFXChange(() ->
-			quantityLabel.setText(numberOfMoleculesFormat.format(value))
-		);
+		internalFXChange(() -> {
+			quantityLabel.setText(numberOfMoleculesFormat.format(value));
+			quantityTip.setText(Double.toString(value));
+		});
 	}
 
 	private Substance substace() {
