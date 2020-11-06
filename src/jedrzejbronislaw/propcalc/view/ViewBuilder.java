@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
@@ -24,12 +25,14 @@ import lombok.RequiredArgsConstructor;
 public class ViewBuilder {
 	
 	private static final String CSS_FILE_PATH = "application.css";
+	private static final String LOGO_FILE_NAME = "logo.png";
 	
 	private final Components components;
 	
 	
 	public void build(Stage stage) {
 		stage.setScene(buildScene());
+		stage.getIcons().add(loadLogo());
 		stage.setWidth(500);
 		stage.setHeight(600);
 		stage.setTitle(Internationalization.get("window_title"));
@@ -37,6 +40,10 @@ public class ViewBuilder {
 			Platform.exit();
 			System.exit(0);
 		});
+	}
+
+	private Image loadLogo() {
+		return new Image(LOGO_FILE_NAME);
 	}
 
 	private Scene buildScene() {
