@@ -31,7 +31,7 @@ public class ViewBuilder {
 	public void build(Stage stage) {
 		stage.setScene(buildScene());
 		stage.setWidth(500);
-		stage.setHeight(500);
+		stage.setHeight(600);
 		stage.setTitle(Internationalization.get("window_title"));
 		stage.setOnCloseRequest(e -> {
 			Platform.exit();
