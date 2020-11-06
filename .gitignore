@@ -1,6 +1,7 @@
 build/
 target/
 bin/
+dependency-reduced-pom.xml
 
 # Compiled class file
 *.class
