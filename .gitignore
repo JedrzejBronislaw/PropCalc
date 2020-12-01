@@ -2,6 +2,7 @@ build/
 target/
 bin/
 dependency-reduced-pom.xml
+substances.json
 
 # Compiled class file
 *.class

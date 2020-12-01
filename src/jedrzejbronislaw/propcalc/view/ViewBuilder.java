@@ -87,7 +87,7 @@ public class ViewBuilder {
 
 	private SubstancesSettingItem substancesSettingItem(Solution solution) {
 		SubstancesSettingItem item = new SubstancesSettingItem(solution);
-		item.setSubstances(Substances.all());
+		item.setSubstances(Substances.load());
 		
 		return item;
 	}
