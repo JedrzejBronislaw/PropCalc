@@ -40,6 +40,11 @@
                   <ScrollPane fx:id="totalPane" />
                </content>
           </Tab>
+            <Tab closable="false" text="%substances">
+               <content>
+                  <ScrollPane fx:id="substancesPane" />
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

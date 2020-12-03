@@ -14,6 +14,7 @@ import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController;
 import jedrzejbronislaw.propcalc.view.particulatesUnit.ParticulatesUnitController;
+import jedrzejbronislaw.propcalc.view.substanceManager.SubstanceManagerController;
 import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSetting;
 import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
 import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolume;
@@ -60,6 +61,7 @@ public class ViewBuilder {
 		MainWindowController controller = nac.getController();
 
 		controller.setParticlesPane(particulatesUnit());
+		controller.setSubstancesPane(substancesManager());
 		
 		return nac.getNode();
 	}
@@ -108,5 +110,15 @@ public class ViewBuilder {
 
 	private SubstancesVolumeItem substancesVolumeItem(Solution solution) {
 		return new SubstancesVolumeItem(solution);
+	}
+
+	private Node substancesManager() {
+		MyFXMLLoader<SubstanceManagerController> loader = new MyFXMLLoader<>();
+		NodeAndController<SubstanceManagerController> nac = loader.create("SubstanceManager.fxml");
+
+		SubstanceManagerController controller = nac.getController();
+		controller.addSubstances(Substances.load());
+		
+		return nac.getNode();
 	}
 }

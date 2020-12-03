@@ -12,6 +12,7 @@ public class MainWindowController implements Initializable {
 
 	@FXML private ScrollPane particlesPane;
 	@FXML private ScrollPane totalPane;
+	@FXML private ScrollPane substancesPane;
 	
 	
 	public void setParticlesPane(Node pane) {
@@ -20,6 +21,10 @@ public class MainWindowController implements Initializable {
 	
 	public void setTotalPane(Node pane) {
 		totalPane.setContent(pane);
+	}
+	
+	public void setSubstancesPane(Node pane) {
+		substancesPane.setContent(pane);
 	}
 	
 	@Override

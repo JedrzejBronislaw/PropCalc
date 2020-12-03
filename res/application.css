@@ -17,3 +17,7 @@
 .valueUnit{
 	-fx-spacing: 3;
 }
+
+.substanceField {
+	-fx-background-color: #ddd;
+}
