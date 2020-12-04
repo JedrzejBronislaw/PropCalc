@@ -118,6 +118,7 @@ public class ViewBuilder {
 
 		SubstanceManagerController controller = nac.getController();
 		controller.addSubstances(Substances.load());
+		controller.setSaveSubstances(substances -> Substances.saveToFile(substances));
 		
 		return nac.getNode();
 	}

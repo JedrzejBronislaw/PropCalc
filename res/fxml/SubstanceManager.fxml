@@ -12,6 +12,6 @@
          <VBox.margin>
             <Insets left="5.0" />
          </VBox.margin></VBox>
-      <Button mnemonicParsing="false" text="%save" />
+      <Button mnemonicParsing="false" onAction="#saveButtonClick" text="%save" />
    </children>
 </VBox>

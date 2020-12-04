@@ -44,7 +44,7 @@ public class Substances {
 		saveToFile(defaultList());
 	}
 	
-	static private boolean saveToFile(List<Substance> substances) {
+	static public boolean saveToFile(List<Substance> substances) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
 		try (FileWriter writer = new FileWriter(FILE_NAME)) {
