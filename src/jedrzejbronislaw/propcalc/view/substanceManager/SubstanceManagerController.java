@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,8 +41,11 @@ public class SubstanceManagerController implements Initializable {
 		Button button = (Button) event.getSource();
 		
 		button.setDisable(true);
-		Injection.run(saveSubstances, getSubstances());
-		button.setDisable(false);
+		
+		new Thread(() -> {
+			Injection.run(saveSubstances, getSubstances());
+			Platform.runLater(() -> button.setDisable(false));
+		}).start();
 	}
 
 	private List<Substance> getSubstances() {
