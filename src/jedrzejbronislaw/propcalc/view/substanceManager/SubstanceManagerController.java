@@ -33,6 +33,11 @@ public class SubstanceManagerController implements Initializable {
 	public void addSubstance(Substance substance) {
 		SubstanceField field = new SubstanceField(substance);
 		
+		field.setDeleteEvent(() -> {
+			substanceFields.remove(field);
+			list.getChildren().remove(field);
+		});
+		
 		substanceFields.add(field);
 		list.getChildren().add(field);
 	}

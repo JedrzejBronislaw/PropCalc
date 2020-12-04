@@ -6,9 +6,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import jedrzejbronislaw.propcalc.substances.Substance;
+import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
+import lombok.Setter;
 
 public class SubstanceField extends GridPane implements Initializable {
 
@@ -16,6 +19,8 @@ public class SubstanceField extends GridPane implements Initializable {
 	@FXML private TextField fullName;
 	@FXML private TextField formula;
 	@FXML private TextField molarMass;
+	
+	@Setter private Runnable deleteEvent;
 	
 	
 	public SubstanceField() {
@@ -35,6 +40,10 @@ public class SubstanceField extends GridPane implements Initializable {
 				formula.getText(),
 				Float.parseFloat(molarMass.getText())
 			);
+	}
+	
+	public void deleteClicked(MouseEvent event) {
+		Injection.run(deleteEvent);
 	}
 	
 	@Override
