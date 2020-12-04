@@ -7,13 +7,13 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import jedrzejbronislaw.propcalc.substances.Substance;
+import jedrzejbronislaw.propcalc.tools.Concurrent;
 import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.view.substanceManager.field.SubstanceField;
 import lombok.Setter;
@@ -40,12 +40,11 @@ public class SubstanceManagerController implements Initializable {
 	public void saveButtonClick(ActionEvent event) {
 		Button button = (Button) event.getSource();
 		
-		button.setDisable(true);
-		
-		new Thread(() -> {
-			Injection.run(saveSubstances, getSubstances());
-			Platform.runLater(() -> button.setDisable(false));
-		}).start();
+		Concurrent.toFx(
+			() -> button.setDisable(true),
+			() -> Injection.run(saveSubstances, getSubstances()),
+			() -> button.setDisable(false)
+		);
 	}
 
 	private List<Substance> getSubstances() {
