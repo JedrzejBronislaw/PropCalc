@@ -36,7 +36,7 @@ public class SubstanceManagerController implements Initializable {
 		substanceFields.add(field);
 		list.getChildren().add(field);
 	}
-	
+
 	public void saveButtonClick(ActionEvent event) {
 		Button button = (Button) event.getSource();
 		
@@ -45,6 +45,10 @@ public class SubstanceManagerController implements Initializable {
 			() -> Injection.run(saveSubstances, getSubstances()),
 			() -> button.setDisable(false)
 		);
+	}
+
+	public void addButtonClick(ActionEvent event) {
+		addSubstance(null);
 	}
 
 	private List<Substance> getSubstances() {

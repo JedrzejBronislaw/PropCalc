@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.substanceManager.SubstanceManagerController">
@@ -12,6 +13,11 @@
          <VBox.margin>
             <Insets left="5.0" />
          </VBox.margin></VBox>
-      <Button mnemonicParsing="false" onAction="#saveButtonClick" text="%save" />
+      <HBox spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#addButtonClick" text="%add_substance" />
+            <Button mnemonicParsing="false" onAction="#saveButtonClick" text="%save" />
+         </children>
+      </HBox>
    </children>
 </VBox>
