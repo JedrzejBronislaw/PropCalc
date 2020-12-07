@@ -6,16 +6,16 @@ import java.util.function.Consumer;
 
 public class Mixture {
 	
-	private boolean updating = false;
-
 	private List<Solution> solutions = new ArrayList<>();
 	private List<Consumer<Solution>> addListeners = new ArrayList<>();
 	
+	private ProportionController propCtrl = new ProportionController(solutions);
+	
 	
 	public void addSolution(Solution solution) {
-		solution.addChangeSubstanceListener(this::updateVolumes);
-		solution.addChangeProportionListener(this::updateVolumes);
-		solution.addChangeVolumeListener(() -> updateVolumes(solution));
+		solution.addChangeSubstanceListener(   propCtrl::updateVolumes);
+		solution.addChangeProportionListener(  propCtrl::updateVolumes);
+		solution.addChangeVolumeListener(() -> propCtrl .updateVolumes(solution));
 		solutions.add(solution);
 		callAddListeners(solution);
 	}
@@ -30,68 +30,7 @@ public class Mixture {
 	}
 	
 	
-	private void updateVolumes() {
-		if (updating) return;
-		
-		updateVolumes(volumeSum());
-	}
-	
-	public void updateVolumes(double totalVolume) {
-		if (updating) return;
-		
-		double proportionVolumesSum = proportionVolumesSum();
-		if (proportionVolumesSum == 0) return;
-		
-		updating = true;
-		
-		for (Solution solution : solutions) {
-			if (solution.getSubstance() == null) continue;
-			
-			solution.setVolume(solution.proportionOfVolume() / proportionVolumesSum * totalVolume);
-		}
-		
-		updating = false;
-	}
-
-	private void updateVolumes(Solution changedSolution) {
-		if (updating) return;
-		if (changedSolution.getSubstance() == null) return;
-		
-		double xB = changedSolution.getProportion() * changedSolution.getSubstance().getMolarMass();
-		if (xB == 0) return;
-		
-		updating = true;
-		
-		for (Solution solution : solutions) {
-			if (solution == changedSolution) continue;
-			if (solution.getSubstance() == null) continue;
-			
-			double xA =  solution.getProportion() * solution.getSubstance().getMolarMass();
-			
-			solution.setVolume(xA / xB * changedSolution.getVolume());
-		}
-		
-		updating = false;
-	}
-
-
-	private double proportionVolumesSum() {
-		double sum = 0;
-		
-		for(Solution solution : solutions)
-			if (solution.getSubstance() != null)
-				sum += solution.proportionOfVolume();
-		
-		return sum;
-	}
-	
-	private double volumeSum() {
-		double sum = 0;
-		
-		for(Solution solution : solutions)
-			if (solution.getSubstance() != null)
-				sum += solution.getVolume();
-		
-		return sum;
+	public void setVolume(double volume) {
+		propCtrl.updateVolumes(volume);
 	}
 }
