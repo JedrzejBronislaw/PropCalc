@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController">
@@ -25,7 +26,20 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label id="title" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="%window_title" HBox.hgrow="ALWAYS" />
+            <StackPane HBox.hgrow="ALWAYS">
+               <children>
+                  <Label id="title" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="%window_title" />
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Label onMouseClicked="#plLangClick" styleClass="langLabel" text="PL" />
+                        <Label onMouseClicked="#enLangClick" styleClass="langLabel" text="EN" />
+                     </children>
+                     <StackPane.margin>
+                        <Insets right="5.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
          </children>
       </HBox>
       <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">

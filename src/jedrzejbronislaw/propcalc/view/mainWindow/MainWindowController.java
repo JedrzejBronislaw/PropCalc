@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 
 public class MainWindowController implements Initializable {
 
@@ -25,6 +26,14 @@ public class MainWindowController implements Initializable {
 	
 	public void setSubstancesPane(Node pane) {
 		substancesPane.setContent(pane);
+	}
+	
+	public void plLangClick(MouseEvent event) {
+		System.out.println("PL click");
+	}
+	
+	public void enLangClick(MouseEvent event) {
+		System.out.println("EN click");
 	}
 	
 	@Override

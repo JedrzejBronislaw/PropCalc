@@ -21,3 +21,13 @@
 .substanceField {
 	-fx-background-color: #ddd;
 }
+
+.langLabel {
+	-fx-font-size: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #aaa;
+}
+
+.langLabel:hover {
+	-fx-text-fill: #555;
+}
