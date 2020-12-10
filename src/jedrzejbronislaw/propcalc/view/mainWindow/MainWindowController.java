@@ -2,18 +2,24 @@ package jedrzejbronislaw.propcalc.view.mainWindow;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import jedrzejbronislaw.propcalc.lang.Languages;
+import jedrzejbronislaw.propcalc.tools.Injection;
+import lombok.Setter;
 
 public class MainWindowController implements Initializable {
 
 	@FXML private ScrollPane particlesPane;
 	@FXML private ScrollPane totalPane;
 	@FXML private ScrollPane substancesPane;
+	
+	@Setter private Consumer<Languages> changeLanguage;
 	
 	
 	public void setParticlesPane(Node pane) {
@@ -29,11 +35,11 @@ public class MainWindowController implements Initializable {
 	}
 	
 	public void plLangClick(MouseEvent event) {
-		System.out.println("PL click");
+		Injection.run(changeLanguage, Languages.POLISH);
 	}
 	
 	public void enLangClick(MouseEvent event) {
-		System.out.println("EN click");
+		Injection.run(changeLanguage, Languages.ENGLISH);
 	}
 	
 	@Override

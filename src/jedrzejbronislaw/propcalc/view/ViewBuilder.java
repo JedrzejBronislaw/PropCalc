@@ -1,5 +1,7 @@
 package jedrzejbronislaw.propcalc.view;
 
+import java.util.function.Consumer;
+
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -8,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
+import jedrzejbronislaw.propcalc.lang.Languages;
 import jedrzejbronislaw.propcalc.model.Solution;
 import jedrzejbronislaw.propcalc.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
@@ -21,12 +24,15 @@ import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolume;
 import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItem;
 import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeTotal;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @RequiredArgsConstructor
 public class ViewBuilder {
 	
 	private static final String CSS_FILE_PATH = "application.css";
 	private static final String LOGO_FILE_NAME = "logo.png";
+	
+	@Setter private Consumer<Languages> changeLanguage;
 	
 	private final Components components;
 	
@@ -62,6 +68,7 @@ public class ViewBuilder {
 
 		controller.setParticlesPane(particulatesUnit());
 		controller.setSubstancesPane(substancesManager());
+		controller.setChangeLanguage(changeLanguage);
 		
 		return nac.getNode();
 	}
