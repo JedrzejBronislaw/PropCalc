@@ -3,8 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox fx:id="mainBox" spacing="25.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.particulatesUnit.ParticulatesUnitController">
+<VBox fx:id="mainBox" spacing="25.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.moleculesUnit.MoleculesUnitController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>

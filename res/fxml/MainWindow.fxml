@@ -46,7 +46,7 @@
         <tabs>
           <Tab closable="false" text="%proportion_of_particles">
                <content>
-                  <ScrollPane fx:id="particlesPane" />
+                  <ScrollPane fx:id="moleculesPane" />
                </content>
           </Tab>
           <Tab closable="false" disable="true" text="%percentage_of_the_total">

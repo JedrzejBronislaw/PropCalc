@@ -15,15 +15,15 @@ import lombok.Setter;
 
 public class MainWindowController implements Initializable {
 
-	@FXML private ScrollPane particlesPane;
+	@FXML private ScrollPane moleculesPane;
 	@FXML private ScrollPane totalPane;
 	@FXML private ScrollPane substancesPane;
 	
 	@Setter private Consumer<Languages> changeLanguage;
 	
 	
-	public void setParticlesPane(Node pane) {
-		particlesPane.setContent(pane);
+	public void setMoleculesPane(Node pane) {
+		moleculesPane.setContent(pane);
 	}
 	
 	public void setTotalPane(Node pane) {

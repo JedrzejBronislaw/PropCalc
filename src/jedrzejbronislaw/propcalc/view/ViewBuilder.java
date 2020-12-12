@@ -16,7 +16,7 @@ import jedrzejbronislaw.propcalc.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController;
-import jedrzejbronislaw.propcalc.view.particulatesUnit.ParticulatesUnitController;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.MoleculesUnitController;
 import jedrzejbronislaw.propcalc.view.substanceManager.SubstanceManagerController;
 import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSetting;
 import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
@@ -66,18 +66,18 @@ public class ViewBuilder {
 
 		MainWindowController controller = nac.getController();
 
-		controller.setParticlesPane(particulatesUnit());
+		controller.setMoleculesPane(moleculesUnit());
 		controller.setSubstancesPane(substancesManager());
 		controller.setChangeLanguage(changeLanguage);
 		
 		return nac.getNode();
 	}
 
-	private Node particulatesUnit() {
-		MyFXMLLoader<ParticulatesUnitController> loader = new MyFXMLLoader<>();
-		NodeAndController<ParticulatesUnitController> nac = loader.create("ParticulatesUnit.fxml");
+	private Node moleculesUnit() {
+		MyFXMLLoader<MoleculesUnitController> loader = new MyFXMLLoader<>();
+		NodeAndController<MoleculesUnitController> nac = loader.create("MoleculesUnit.fxml");
 
-		ParticulatesUnitController controller = nac.getController();
+		MoleculesUnitController controller = nac.getController();
 		controller.addNode(substancesSetting());
 		controller.addNode(substancesVolume());
 		
