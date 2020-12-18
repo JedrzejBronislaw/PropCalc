@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import jedrzejbronislaw.propcalc.components.Clipboard;
 import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
 import jedrzejbronislaw.propcalc.lang.Languages;
@@ -80,6 +81,7 @@ public class ViewBuilder {
 		MoleculesUnitController controller = nac.getController();
 		controller.addNode(substancesSetting());
 		controller.addNode(substancesVolume());
+		controller.setClipboard(new Clipboard(components.getMixture()));
 		
 		return nac.getNode();
 	}

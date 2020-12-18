@@ -8,10 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+import jedrzejbronislaw.propcalc.components.Clipboard;
+import lombok.Setter;
 
 public class MoleculesUnitController implements Initializable {
 
 	@FXML private VBox mainBox;
+	
+	@Setter Clipboard clipboard;
 	
 
 	public void addNode(Node node) {
@@ -19,7 +23,7 @@ public class MoleculesUnitController implements Initializable {
 	}
 	
 	public void copyToClipboard(ActionEvent event) {
-		System.out.println("copy");
+		if (clipboard != null) clipboard.save();
 	}
 	
 	@Override

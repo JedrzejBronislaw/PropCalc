@@ -1,6 +1,7 @@
 package jedrzejbronislaw.propcalc.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -18,6 +19,10 @@ public class Mixture {
 		solution.addChangeVolumeListener(() -> propCtrl .updateVolumes(solution));
 		solutions.add(solution);
 		callAddListeners(solution);
+	}
+	
+	public List<Solution> getSolutions() {
+		return Collections.unmodifiableList(solutions);
 	}
 
 
