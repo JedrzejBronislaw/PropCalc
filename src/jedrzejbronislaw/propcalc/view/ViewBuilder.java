@@ -89,7 +89,10 @@ public class ViewBuilder {
 	private Node substancesSetting() {
 		SubstancesSetting substancesSetting = new SubstancesSetting();
 
-		components.getMixture().addAddListener(solution -> substancesSetting.addItem(substancesSettingItem(solution)));
+		Consumer<Solution> addSolutionItem = solution -> substancesSetting.addItem(substancesSettingItem(solution));
+		
+		components.getMixture().getSolutions().forEach(addSolutionItem);
+		components.getMixture().addAddListener(addSolutionItem);
 		
 		substancesSetting.setAddAction(() -> components.getMixture().addSolution(new Solution()));
 		
@@ -110,9 +113,14 @@ public class ViewBuilder {
 		totalItem.setOnVolumeChange(components.getMixture()::setVolume);
 		
 		substancesVolume.setTotalPane(totalItem);
+
+		Consumer<Solution> addSolutionItem = solution -> {
+			substancesVolume.addItem(substancesVolumeItem(solution));
+			totalItem.addSolution(solution);
+		};
 		
-		components.getMixture().addAddListener(solution -> substancesVolume.addItem(substancesVolumeItem(solution)));
-		components.getMixture().addAddListener(totalItem::addSolution);
+		components.getMixture().getSolutions().forEach(addSolutionItem);
+		components.getMixture().addAddListener(addSolutionItem);
 		
 		return substancesVolume;
 	}

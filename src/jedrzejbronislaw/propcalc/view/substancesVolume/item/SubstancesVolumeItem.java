@@ -38,6 +38,7 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 	public SubstancesVolumeItem(Solution solution) {
 		this.solution = solution;
 		MyFXMLLoader.create("SubstancesVolumeItem.fxml", this);
+		if (solution != null) update();
 	}
 	
 	@Override
@@ -58,6 +59,10 @@ public class SubstancesVolumeItem extends HBox implements Initializable {
 			if (isNewVolumeValue(newV, oldV))
 				setSolutionVolume();
 		});
+	}
+	
+	private void update() {
+		volumeField.setText(solution.getVolume()+"");
 	}
 
 	protected void setToolTips() {

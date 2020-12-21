@@ -8,11 +8,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 import jedrzejbronislaw.propcalc.model.Solution;
 import jedrzejbronislaw.propcalc.substances.Substance;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
@@ -21,8 +18,6 @@ public class SubstancesSettingItem extends HBox implements Initializable {
 
 	@FXML private ComboBox<Substance> substanceBox;
 	@FXML private TextField proportionField;
-	
-	private Callback<ListView<Substance>, ListCell<Substance>> substanceCellFactory = new SubstanceCellFactory();
 	
 	private final Solution solution;
 	
@@ -37,18 +32,25 @@ public class SubstancesSettingItem extends HBox implements Initializable {
 	public SubstancesSettingItem(Solution solution) {
 		this.solution = solution;
 		MyFXMLLoader.create("SubstancesSettingItem.fxml", this);
+		update();
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		substanceBox.setCellFactory(substanceCellFactory);
-		substanceBox.setButtonCell(substanceCellFactory.call(null));
 		substanceBox.setOnAction(e -> solution.setSubstance(substanceBox.getValue()));
+		substanceBox.setConverter(new SubstanceStringConverter());
 		
 		proportionField.textProperty().addListener((o, oldV, newV) -> {
 			validateVolumeField(newV);
 			setSolutionProportion();
+		});
+	}
+	
+	private void update() {
+		Platform.runLater(() -> {
+			substanceBox.setValue(solution.getSubstance());
+			proportionField.setText(solution.getProportion()+"");
 		});
 	}
 	

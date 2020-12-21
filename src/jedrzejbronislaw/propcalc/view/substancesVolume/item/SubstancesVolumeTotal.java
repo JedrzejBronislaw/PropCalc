@@ -26,6 +26,7 @@ public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 	public void addSolution(Solution solution) {
 		solutions.add(solution);
 		solution.addChangeListener(this::update);
+		update();
 	}
 	
 	private void update() {
