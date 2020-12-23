@@ -63,6 +63,8 @@ public class Solution {
 	}
 	
 	public void setVolume(double volume) {
+		if (volume < 0) throw new IllegalArgumentException("Volume cannot be negative (" + volume + " < 0).");
+
 		this.volume = volume;
 		callChangeVolumeListeners();
 		callChangeListeners();
