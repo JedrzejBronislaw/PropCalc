@@ -57,6 +57,8 @@ public class Solution {
 	}
 	
 	public void setProportion(int proportion) {
+		if (proportion < 0) throw new IllegalArgumentException("Proportion cannot be negative (" + proportion + " < 0).");
+
 		this.proportion = proportion;
 		callChangeProportionListeners();
 		callChangeListeners();
