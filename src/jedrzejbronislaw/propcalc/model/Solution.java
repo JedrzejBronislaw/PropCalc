@@ -37,7 +37,8 @@ public class Solution {
 	}
 	
 	public double proportionOfVolume() {
-		if (substance == null) return 0;
+		if (substance == null || concentration <= 0)
+			throw new IllegalStateException();
 		
 		return proportion * substance.getMolarMass() / concentration;
 	}
@@ -51,6 +52,8 @@ public class Solution {
 	}
 	
 	public void setConcentration(double concentration) {
+		if (concentration < 0) throw new IllegalArgumentException("Concentration cannot be negative (" + concentration + " < 0).");
+
 		this.concentration = concentration;
 		callChangeConcentrationListeners();
 		callChangeListeners();
