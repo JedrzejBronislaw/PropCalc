@@ -22,4 +22,19 @@ public class SubstanceTest {
 		new Substance("name", "fullName", "formula", -3f);
 	}
 
+	
+	@Test(expected = NullPointerException.class)
+	public void nullName() {
+		new Substance(null, "fullName", "formula", 1f);
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void nullFullname() {
+		new Substance("name", null, "formula", 1f);
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void nullFormula() {
+		new Substance("name", "fullName", null, 1f);
+	}
 }
