@@ -17,7 +17,9 @@ public class Mixture {
 		solution.addChangeSubstanceListener(   propCtrl::updateVolumes);
 		solution.addChangeProportionListener(  propCtrl::updateVolumes);
 		solution.addChangeVolumeListener(() -> propCtrl .updateVolumes(solution));
+		
 		solutions.add(solution);
+		propCtrl.updateVolumes(solution);
 		callAddListeners(solution);
 	}
 	
