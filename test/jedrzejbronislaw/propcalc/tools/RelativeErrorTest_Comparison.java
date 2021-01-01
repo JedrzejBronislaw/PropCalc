@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RelativeErrorTest {
+public class RelativeErrorTest_Comparison {
 
 	private RelativeError relativeError;
 	

@@ -1,16 +1,23 @@
 package jedrzejbronislaw.propcalc.tools;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class RelativeError {
 	
 	private double expected;
 	private double actual;
 
 
+	public RelativeError(double expected, double actual) {
+		if (expected == 0 && actual != 0) throw new IllegalArgumentException();
+		
+		this.expected = expected;
+		this.actual = actual;
+	}
+
+
 	public double value() {
-		return Math.abs(expected-actual) / expected;
+		if (actual == expected) return 0;
+		
+		return Math.abs(expected-actual) / Math.abs(expected);
 	}
 
 	public boolean isLessThan(double threshold) {
