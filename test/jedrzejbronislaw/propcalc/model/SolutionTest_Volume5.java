@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import jedrzejbronislaw.propcalc.substances.Substance;
+import jedrzejbronislaw.propcalc.tools.RelativeError;
 
 public class SolutionTest_Volume5 {
 
@@ -30,12 +31,9 @@ public class SolutionTest_Volume5 {
 
 	@Test
 	public void testNumberOfMolecules() {
-		double expected = 6.5931035e+18;
-		double actual = solution.numberOfMolecules();
-		
-		double relativeError = (Math.abs(expected-actual)/expected);
-		
-		assertTrue(relativeError < 0.00001);
+		RelativeError relativeError = new RelativeError(6.5931035e+18, solution.numberOfMolecules());
+
+		assertTrue(relativeError.isLessThan(0.00001));
 	}
 
 	@Test
