@@ -20,6 +20,7 @@ public class ProportionController {
 	}
 	
 	public void updateVolumes(double totalVolume) {
+		if (totalVolume < 0) throw new IllegalArgumentException("Volume cannot be negative (" + totalVolume + " < 0).");
 		if (updating) return;
 		
 		double proportionVolumesSum = proportionVolumesSum();
