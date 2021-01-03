@@ -5,18 +5,22 @@ import java.util.stream.IntStream;
 public class GCD {
 	
 	public static int gcd(int a, int b) {
+
+		if (a==0) return b;
+		if (b==0) return a;
 		
-		while(a != b) {
-			if (a > b)
-				a -= b; else
-				b -= a;
-		}
+		if (a < 0) a = -a;
+		if (b < 0) b = -b;
 		
-		return a;
+		return euclid(a, b);
 	}
 	
-	public static int gcd(int[] nums) {
+	public static int gcd(int... nums) {
+		if (nums==null ||nums.length == 0) throw new IllegalArgumentException("Lenght of nums have to be greater than 0.");
+		
+		nums = IntStream.of(nums).map(Math::abs).toArray();
 		nums = delZero(nums);
+		if (nums.length == 0) return 0;
 		
 		int[] tab = nums;
 		int min;
@@ -32,6 +36,15 @@ public class GCD {
 		}
 		
 		return tab[0];
+	}
+
+	private static int euclid(int a, int b) {
+		while(a != b) {
+			if (a > b)
+				a -= b; else
+				b -= a;
+		}
+		return a;
 	}
 	
 	private static int[] delZero(int[] tab) {
