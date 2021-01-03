@@ -2,7 +2,8 @@ package jedrzejbronislaw.propcalc.model.percent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
+
+import jedrzejbronislaw.propcalc.tools.GCD;
 
 public class Calc {
 
@@ -37,10 +38,10 @@ public class Calc {
 				int a = (int)(percent * 1000000);
 				int b = 100 * x - a;
 				
-				int nwd = nwd(a, b);
+				int gcd = GCD.gcd(a, b);
 				
-				item.      setProportion(a / nwd);
-				secondItem.setProportion(b / nwd);
+				item.      setProportion(a / gcd);
+				secondItem.setProportion(b / gcd);
 				
 //				System.out.println("per = " + percent);
 //				System.out.println("nwd = " + nwd);
@@ -66,8 +67,8 @@ public class Calc {
 			
 			
 			int[] props = items.stream().mapToInt(i -> i.getProportion()).toArray();
-			int nwd = nwd(props);
-			items.forEach(i -> i.setProportion(i.getProportion() / nwd));
+			int gcd = GCD.gcd(props);
+			items.forEach(i -> i.setProportion(i.getProportion() / gcd));
 			
 //			items.forEach(i -> System.out.println(i.getProportion()));
 //			System.out.println();
@@ -95,51 +96,5 @@ public class Calc {
 		return totalProportion() - item.getProportion();
 	}
 	
-	private int nwd(int a, int b) {
-		
-		while(a != b) {
-			if (a > b)
-				a -= b; else
-				b -= a;
-		}
-		
-		return a;
-	}
-	
-	private int nwd(int[] nums) {
-//		System.out.println("ndw " + Arrays.toString(nums) + " = ");
 
-		nums = delZero(nums);
-		
-//		System.out.print("ndw " + Arrays.toString(nums) + " = ");
-		
-		int[] tab = nums;
-		int min;
-		
-		
-		while (tab.length > 1) {
-			min = min(tab);
-			
-			for(int i=0; i<tab.length; i++)
-				if (tab[i] != min) tab[i] -= min;
-			
-			tab = delDuplicate(tab);
-		}
-		
-//		System.out.println(tab[0]);
-		
-		return tab[0];
-	}
-	
-	private int[] delZero(int[] tab) {
-		return IntStream.of(tab).filter(i -> i!=0).toArray();
-	}
-
-	private int[] delDuplicate(int[] tab) {
-		return IntStream.of(tab).distinct().toArray();
-	}
-
-	private int min(int[] tab) {
-		return IntStream.of(tab).min().getAsInt();
-	}
 }
