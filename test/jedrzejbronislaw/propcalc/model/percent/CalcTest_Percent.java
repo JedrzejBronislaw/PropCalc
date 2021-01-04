@@ -297,4 +297,77 @@ public class CalcTest_Percent {
 		assertEquals(180, item3.getMass(), 0.000001);
 	}
 	
+	//real percentage
+
+	@Test
+	public void setPercent_2items_5_5() {
+		Item item1 = new Item();
+		Item item2 = new Item();
+		calc.addItem(item1);
+		calc.addItem(item2);
+		
+		calc.setPercent(item1, 5.5);
+		
+		assertEquals( 5.5, calc.getPercent(item1), 0.000001);
+		assertEquals(94.5, calc.getPercent(item2), 0.000001);
+
+		assertEquals( 11, item1.getProportion());
+		assertEquals(189, item2.getProportion());
+	}
+
+	@Test
+	public void setPercent_2items_33_3333333333() {
+		Item item1 = new Item();
+		Item item2 = new Item();
+		calc.addItem(item1);
+		calc.addItem(item2);
+		
+		calc.setPercent(item1, 100.0/3);
+		
+		assertEquals(33.3333333333, calc.getPercent(item1), 0.000001);
+		assertEquals(66.6666666666, calc.getPercent(item2), 0.000001);
+
+		assertEquals(1, item1.getProportion());
+		assertEquals(2, item2.getProportion());
+	}
+
+	@Test
+	public void setPercent_3items_5_5() {
+		Item item1 = new Item(0, 0);
+		Item item2 = new Item(0, 1);
+		Item item3 = new Item(0, 2);
+		calc.addItem(item1);
+		calc.addItem(item2);
+		calc.addItem(item3);
+		
+		calc.setPercent(item1, 5.5);
+		
+		assertEquals( 5.5, calc.getPercent(item1), 0.000001);
+		assertEquals(31.5, calc.getPercent(item2), 0.000001);
+		assertEquals(63,   calc.getPercent(item3), 0.000001);
+
+		assertEquals( 11, item1.getProportion());
+		assertEquals( 63, item2.getProportion());
+		assertEquals(126, item3.getProportion());
+	}
+
+	@Test
+	public void setPercent_3items_33_3333333333() {
+		Item item1 = new Item(0, 0);
+		Item item2 = new Item(0, 1);
+		Item item3 = new Item(0, 2);
+		calc.addItem(item1);
+		calc.addItem(item2);
+		calc.addItem(item3);
+		
+		calc.setPercent(item1, 100.0/3);
+		
+		assertEquals(33.3333333333, calc.getPercent(item1), 0.000001);
+		assertEquals(22.2222222222, calc.getPercent(item2), 0.000001);
+		assertEquals(44.4444444444, calc.getPercent(item3), 0.000001);
+
+		assertEquals(3, item1.getProportion());
+		assertEquals(2, item2.getProportion());
+		assertEquals(4, item3.getProportion());
+	}
 }
