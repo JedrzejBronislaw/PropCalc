@@ -6,6 +6,7 @@ import java.util.List;
 import jedrzejbronislaw.propcalc.tools.GCD;
 
 public class Calc {
+	private static final int PERCENT_PRECISION = 1000000;
 
 	private List<Item> items = new ArrayList<>();
 	
@@ -21,60 +22,42 @@ public class Calc {
 		if (percent < 0) throw new IllegalArgumentException("Percent cannot be negative (" + percent + " < 0).");
 		if (items.size() < 2) throw new IllegalStateException("There is only one item.");
 		
-		if (items.size() == 2) {
-			Item secondItem = (items.get(0) == item) ? items.get(1) : items.get(0);
-			
-			if (percent == 0) {
-				item.      setProportion(0);
-				secondItem.setProportion(1);
-			} else
-			if (percent == 100) {
-				item.      setProportion(1);
-				secondItem.setProportion(0);
-			} else {
-			
-				int x = 1000000;
-				
-				int a = (int)(percent * 1000000);
-				int b = 100 * x - a;
-				
-				int gcd = GCD.gcd(a, b);
-				
-				item.      setProportion(a / gcd);
-				secondItem.setProportion(b / gcd);
-				
-//				System.out.println("per = " + percent);
-//				System.out.println("nwd = " + nwd);
-//				System.out.println("a = " + a);
-//				System.out.println("b = " + b);
-//				System.out.println();
-			}
-		} else {
-			int oldTotalProportionWithout = totalProportionWithout(item);
-			double percentageWithout = 100 - percent;
-			double percentPerOneProportion = percentageWithout / oldTotalProportionWithout;
-			
-			int newProp = (int) percent;
-			
-//			System.out.println("oldTotalProportionWithout = " + oldTotalProportionWithout);
-//			System.out.println("proportion100precentage = " + proportion100precentage);
-//			System.out.println("newProportion = " + newProportion);
-//			System.out.println("newProp = " + newProp);
-//			System.out.println();
-			
-			items.forEach(i -> i.setProportion((int)(i.getProportion() * percentPerOneProportion)));
-			item.setProportion(newProp);
-			
-			
-			int[] props = items.stream().mapToInt(i -> i.getProportion()).toArray();
-			int gcd = GCD.gcd(props);
-			items.forEach(i -> i.setProportion(i.getProportion() / gcd));
-			
-//			items.forEach(i -> System.out.println(i.getProportion()));
-//			System.out.println();
-		}
+		if (items.size() == 2)
+			setPercent_twoItems(item, percent); else
+			setPercent_moreItems(item, percent);
 		
 		propCrtl.update();
+	}
+
+	private void setPercent_twoItems(Item item, double percent) {
+		Item secondItem = (items.get(0) == item) ? items.get(1) : items.get(0);
+		
+		int a = (int)(       percent  * PERCENT_PRECISION);
+		int b = (int)((100 - percent) * PERCENT_PRECISION);
+		
+		item.      setProportion(a);
+		secondItem.setProportion(b);
+		
+		reduceProportion();
+	}
+
+	private void setPercent_moreItems(Item item, double percent) {
+		double newProportionRatio = (100 - percent) / (totalProportion() - item.getProportion());
+		
+		items.forEach(i -> {
+			int newProportion = (int)(i.getProportion() * newProportionRatio * PERCENT_PRECISION);
+			i.setProportion(newProportion);
+		});
+		item.setProportion((int) (percent * PERCENT_PRECISION));
+		
+		reduceProportion();
+	}
+	
+	private void reduceProportion() {
+		int[] proportions = items.stream().mapToInt(i -> i.getProportion()).toArray();
+		int gcd = GCD.gcd(proportions);
+		
+		items.forEach(i -> i.setProportion(i.getProportion() / gcd));
 	}
 
 	public double getPercent(Item item) {
@@ -91,10 +74,4 @@ public class Calc {
 	public int totalProportion() {
 		return items.stream().mapToInt(item -> item.getProportion()).sum();
 	}
-	
-	public int totalProportionWithout(Item item) {
-		return totalProportion() - item.getProportion();
-	}
-	
-
 }
