@@ -3,8 +3,6 @@ package jedrzejbronislaw.propcalc.model.percent;
 import java.util.ArrayList;
 import java.util.List;
 
-import jedrzejbronislaw.propcalc.tools.GCD;
-
 public class Calc {
 	private static final int PERCENT_PRECISION = 1000000;
 
@@ -13,10 +11,11 @@ public class Calc {
 	private ProportionController propCrtl = new ProportionController(items);
 
 	public void addItem(Item item) {
-		item.addChangeProportionListener(propCrtl::update);
+		item.addChangeMassListener(propCrtl::updateProportion);
+		item.addChangeProportionListener(propCrtl::updateMass);
 		
 		items.add(item);
-		propCrtl.update();
+		propCrtl.updateMass();
 	}
 	
 	public void setPercent(Item item, double percent) {
@@ -28,7 +27,7 @@ public class Calc {
 			setPercent_twoItems(item, percent); else
 			setPercent_moreItems(item, percent);
 		
-		propCrtl.update();
+		propCrtl.updateMass();
 	}
 
 	private void setPercent_twoItems(Item item, double percent) {
@@ -40,7 +39,7 @@ public class Calc {
 		item.      setProportion(a);
 		secondItem.setProportion(b);
 		
-		reduceProportion();
+		propCrtl.reduceProportion();
 	}
 
 	private void setPercent_moreItems(Item item, double percent) {
@@ -52,16 +51,9 @@ public class Calc {
 		});
 		item.setProportion((int) (percent * PERCENT_PRECISION));
 		
-		reduceProportion();
+		propCrtl.reduceProportion();
 	}
 	
-	private void reduceProportion() {
-		int[] proportions = items.stream().mapToInt(i -> i.getProportion()).toArray();
-		int gcd = GCD.gcd(proportions);
-		
-		items.forEach(i -> i.setProportion(i.getProportion() / gcd));
-	}
-
 	public double getPercent(Item item) {
 		if (!items.contains(item)) throw new IllegalArgumentException("Item is not added.");
 		
