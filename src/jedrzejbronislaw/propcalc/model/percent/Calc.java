@@ -13,6 +13,8 @@ public class Calc {
 	private ProportionController propCrtl = new ProportionController(items);
 
 	public void addItem(Item item) {
+		item.addChangeProportionListener(propCrtl::update);
+		
 		items.add(item);
 		propCrtl.update();
 	}
