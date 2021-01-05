@@ -55,6 +55,8 @@ public class Calc {
 	}
 
 	public void setTotalMass(double totalMass) {
+		if (totalMass < 0) throw new IllegalArgumentException("Total mass cannot be negative (" + totalMass + " < 0).");
+		
 		propCrtl.updateMass(totalMass);
 	}
 	

@@ -45,6 +45,19 @@ public class CalcTest_setTotalMass {
 
 		assertEquals(200, calc.totalMass(), 0.000001);
 	}
+	
+	@Test
+	public void setTotalMass_0_oneItem() {
+		Item item = new Item(100, 1);
+		calc.addItem(item);
+		
+		calc.setTotalMass(0);
+
+		assertEquals(0, calc.totalMass(), 0.000001);
+		assertEquals(100, calc.getPercent(item), 0.000001);
+		assertEquals(1, item.getProportion());
+		assertEquals(0, item.getMass(), 0.000001);
+	}
 
 	//two items
 
@@ -160,6 +173,56 @@ public class CalcTest_setTotalMass {
 		
 		assertEquals(600, item1.getMass(), 0.000001);
 		assertEquals(400, item2.getMass(), 0.000001);
+	}
+
+	@Test
+	public void setTotalMass_0_twoItems_proportion_1_3() {
+		Item item1 = new Item(10, 1);
+		Item item2 = new Item(30, 3);
+		calc.addItem(item1);
+		calc.addItem(item2);
+		
+		calc.setTotalMass(0);
+		
+		assertEquals(25, calc.getPercent(item1), 0.000001);
+		assertEquals(75, calc.getPercent(item2), 0.000001);
+
+		assertEquals(1, item1.getProportion());
+		assertEquals(3, item2.getProportion());
+		
+		assertEquals(0, item1.getMass(), 0.000001);
+		assertEquals(0, item2.getMass(), 0.000001);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void setTotalMass_negative_twoItems_proportion_1_3_exception() {
+		Item item1 = new Item(10, 1);
+		Item item2 = new Item(30, 3);
+		calc.addItem(item1);
+		calc.addItem(item2);
+		
+		calc.setTotalMass(-3);
+	}
+
+	@Test
+	public void setTotalMass_negative_twoItems_proportion_1_3_noChange() {
+		Item item1 = new Item(10, 1);
+		Item item2 = new Item(30, 3);
+		calc.addItem(item1);
+		calc.addItem(item2);
+		
+		try {
+			calc.setTotalMass(-3);
+		} catch(IllegalArgumentException e) {}
+		
+		assertEquals(25, calc.getPercent(item1), 0.000001);
+		assertEquals(75, calc.getPercent(item2), 0.000001);
+
+		assertEquals(1, item1.getProportion());
+		assertEquals(3, item2.getProportion());
+		
+		assertEquals(10, item1.getMass(), 0.000001);
+		assertEquals(30, item2.getMass(), 0.000001);
 	}
 
 	//three items
