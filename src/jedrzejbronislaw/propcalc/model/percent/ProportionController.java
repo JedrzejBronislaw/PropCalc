@@ -15,11 +15,14 @@ public class ProportionController {
 
 	
 	public void updateMass() {
+		updateMass(totalMass());
+	}
+
+	public void updateMass(double totalMass) {
 		if (updating) return;
 
 		updating = true;
 		
-		double totalMass = totalMass();
 		int totalProportion = totalProportion();
 		
 		for(Item item : items)

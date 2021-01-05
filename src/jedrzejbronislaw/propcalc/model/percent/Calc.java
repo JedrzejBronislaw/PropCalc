@@ -53,6 +53,10 @@ public class Calc {
 		
 		propCrtl.reduceProportion();
 	}
+
+	public void setTotalMass(double totalMass) {
+		propCrtl.updateMass(totalMass);
+	}
 	
 	public double getPercent(Item item) {
 		if (!items.contains(item)) throw new IllegalArgumentException("Item is not added.");
