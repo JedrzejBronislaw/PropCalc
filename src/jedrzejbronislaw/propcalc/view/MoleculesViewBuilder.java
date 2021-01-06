@@ -10,8 +10,8 @@ import jedrzejbronislaw.propcalc.model.molecules.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.moleculesUnit.MoleculesUnitController;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.SubstancesSetting;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.item.SubstancesSettingItem;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSettings.SubstancesSettings;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSettings.item.SubstancesSettingsItem;
 import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.SubstancesVolume;
 import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.item.SubstancesVolumeItem;
 import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.item.SubstancesVolumeTotal;
@@ -35,7 +35,7 @@ public class MoleculesViewBuilder {
 		NodeAndController<MoleculesUnitController> nac = loader.create("moleculesUnit/MoleculesUnit.fxml");
 
 		MoleculesUnitController controller = nac.getController();
-		controller.addNode(buildSettingPane());
+		controller.addNode(buildSettingsPane());
 		controller.addNode(buildVolumePane());
 		controller.setClipboard(new Clipboard(components.getMixture()));
 		
@@ -43,18 +43,18 @@ public class MoleculesViewBuilder {
 		return node;
 	}
 	
-	private Node buildSettingPane() {
-		SubstancesSetting substancesSetting = new SubstancesSetting();
+	private Node buildSettingsPane() {
+		SubstancesSettings substancesSettings = new SubstancesSettings();
 
-		addNewSolutionInMixtureAction(solution -> substancesSetting.addItem(substancesSettingItem(solution)));
+		addNewSolutionInMixtureAction(solution -> substancesSettings.addItem(substancesSettingsItem(solution)));
 		
-		substancesSetting.setAddAction(() -> components.getMixture().addSolution(new Solution()));
+		substancesSettings.setAddAction(() -> components.getMixture().addSolution(new Solution()));
 		
-		return substancesSetting;
+		return substancesSettings;
 	}
 	
-	private SubstancesSettingItem substancesSettingItem(Solution solution) {
-		SubstancesSettingItem item = new SubstancesSettingItem(solution);
+	private SubstancesSettingsItem substancesSettingsItem(Solution solution) {
+		SubstancesSettingsItem item = new SubstancesSettingsItem(solution);
 		item.setSubstances(Substances.load());
 		
 		return item;

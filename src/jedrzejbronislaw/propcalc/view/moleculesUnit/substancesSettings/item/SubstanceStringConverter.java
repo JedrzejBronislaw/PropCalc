@@ -1,4 +1,4 @@
-package jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.item;
+package jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSettings.item;
 
 import javafx.util.StringConverter;
 import jedrzejbronislaw.propcalc.model.molecules.substances.Substance;

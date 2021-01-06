@@ -1,4 +1,4 @@
-package jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting;
+package jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSettings;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,10 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.item.SubstancesSettingItem;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSettings.item.SubstancesSettingsItem;
 import lombok.Setter;
 
-public class SubstancesSetting extends VBox implements Initializable {
+public class SubstancesSettings extends VBox implements Initializable {
 
 	@FXML private VBox substanceBox;
 	@FXML private Button addButton;
@@ -21,14 +21,14 @@ public class SubstancesSetting extends VBox implements Initializable {
 	@Setter private Runnable onAddSubstance;
 	
 	
-	public void addItem(SubstancesSettingItem item) {
+	public void addItem(SubstancesSettingsItem item) {
 		substanceBox.getChildren().add(item);
 		Injection.run(onAddSubstance);
 	}
 	
 	
-	public SubstancesSetting() {
-		MyFXMLLoader.create("moleculesUnit/SubstancesSetting.fxml", this);
+	public SubstancesSettings() {
+		MyFXMLLoader.create("moleculesUnit/SubstancesSettings.fxml", this);
 	}
 	
 	@Override

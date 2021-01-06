@@ -1,4 +1,4 @@
-package jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.item;
+package jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSettings.item;
 
 import java.net.URL;
 import java.util.List;
@@ -14,7 +14,7 @@ import jedrzejbronislaw.propcalc.model.molecules.Solution;
 import jedrzejbronislaw.propcalc.model.molecules.substances.Substance;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 
-public class SubstancesSettingItem extends HBox implements Initializable {
+public class SubstancesSettingsItem extends HBox implements Initializable {
 
 	@FXML private ComboBox<Substance> substanceBox;
 	@FXML private TextField proportionField;
@@ -29,9 +29,9 @@ public class SubstancesSettingItem extends HBox implements Initializable {
 		});
 	}
 	
-	public SubstancesSettingItem(Solution solution) {
+	public SubstancesSettingsItem(Solution solution) {
 		this.solution = solution;
-		MyFXMLLoader.create("moleculesUnit/SubstancesSettingItem.fxml", this);
+		MyFXMLLoader.create("moleculesUnit/SubstancesSettingsItem.fxml", this);
 		update();
 	}
 	
