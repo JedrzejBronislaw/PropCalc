@@ -12,18 +12,18 @@ import jedrzejbronislaw.propcalc.components.Clipboard;
 import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
 import jedrzejbronislaw.propcalc.lang.Languages;
-import jedrzejbronislaw.propcalc.model.Solution;
-import jedrzejbronislaw.propcalc.substances.Substances;
+import jedrzejbronislaw.propcalc.model.molecules.Solution;
+import jedrzejbronislaw.propcalc.model.molecules.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController;
 import jedrzejbronislaw.propcalc.view.moleculesUnit.MoleculesUnitController;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.SubstancesSetting;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.item.SubstancesSettingItem;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.SubstancesVolume;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.item.SubstancesVolumeItem;
+import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.item.SubstancesVolumeTotal;
 import jedrzejbronislaw.propcalc.view.substanceManager.SubstanceManagerController;
-import jedrzejbronislaw.propcalc.view.substancesSetting.SubstancesSetting;
-import jedrzejbronislaw.propcalc.view.substancesSetting.item.SubstancesSettingItem;
-import jedrzejbronislaw.propcalc.view.substancesVolume.SubstancesVolume;
-import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeItem;
-import jedrzejbronislaw.propcalc.view.substancesVolume.item.SubstancesVolumeTotal;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
@@ -76,7 +76,7 @@ public class ViewBuilder {
 
 	private Node moleculesUnit() {
 		MyFXMLLoader<MoleculesUnitController> loader = new MyFXMLLoader<>();
-		NodeAndController<MoleculesUnitController> nac = loader.create("MoleculesUnit.fxml");
+		NodeAndController<MoleculesUnitController> nac = loader.create("moleculesUnit/MoleculesUnit.fxml");
 
 		MoleculesUnitController controller = nac.getController();
 		controller.addNode(substancesSetting());

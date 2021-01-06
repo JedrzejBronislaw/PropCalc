@@ -1,6 +1,6 @@
 package jedrzejbronislaw.propcalc.components;
 
-import jedrzejbronislaw.propcalc.model.Mixture;
+import jedrzejbronislaw.propcalc.model.molecules.Mixture;
 import lombok.Getter;
 
 public class Components {

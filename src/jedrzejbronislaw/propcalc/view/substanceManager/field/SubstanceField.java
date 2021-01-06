@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import jedrzejbronislaw.propcalc.substances.Substance;
+import jedrzejbronislaw.propcalc.model.molecules.substances.Substance;
 import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import lombok.Setter;

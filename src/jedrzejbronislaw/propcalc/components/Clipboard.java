@@ -4,8 +4,8 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.text.DecimalFormat;
 
-import jedrzejbronislaw.propcalc.model.Mixture;
-import jedrzejbronislaw.propcalc.model.Solution;
+import jedrzejbronislaw.propcalc.model.molecules.Mixture;
+import jedrzejbronislaw.propcalc.model.molecules.Solution;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

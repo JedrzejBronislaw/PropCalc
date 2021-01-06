@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import jedrzejbronislaw.propcalc.substances.Substance;
+import jedrzejbronislaw.propcalc.model.molecules.substances.Substance;
 import jedrzejbronislaw.propcalc.tools.Concurrent;
 import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.view.substanceManager.field.SubstanceField;
