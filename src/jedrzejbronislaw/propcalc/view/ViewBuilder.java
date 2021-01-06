@@ -8,21 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import jedrzejbronislaw.propcalc.components.Clipboard;
 import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.lang.Internationalization;
 import jedrzejbronislaw.propcalc.lang.Languages;
-import jedrzejbronislaw.propcalc.model.molecules.Solution;
 import jedrzejbronislaw.propcalc.model.molecules.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.mainWindow.MainWindowController;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.MoleculesUnitController;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.SubstancesSetting;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesSetting.item.SubstancesSettingItem;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.SubstancesVolume;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.item.SubstancesVolumeItem;
-import jedrzejbronislaw.propcalc.view.moleculesUnit.substancesVolume.item.SubstancesVolumeTotal;
 import jedrzejbronislaw.propcalc.view.substanceManager.SubstanceManagerController;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -75,58 +67,7 @@ public class ViewBuilder {
 	}
 
 	private Node moleculesUnit() {
-		MyFXMLLoader<MoleculesUnitController> loader = new MyFXMLLoader<>();
-		NodeAndController<MoleculesUnitController> nac = loader.create("moleculesUnit/MoleculesUnit.fxml");
-
-		MoleculesUnitController controller = nac.getController();
-		controller.addNode(substancesSetting());
-		controller.addNode(substancesVolume());
-		controller.setClipboard(new Clipboard(components.getMixture()));
-		
-		return nac.getNode();
-	}
-
-	private Node substancesSetting() {
-		SubstancesSetting substancesSetting = new SubstancesSetting();
-
-		Consumer<Solution> addSolutionItem = solution -> substancesSetting.addItem(substancesSettingItem(solution));
-		
-		components.getMixture().getSolutions().forEach(addSolutionItem);
-		components.getMixture().addAddListener(addSolutionItem);
-		
-		substancesSetting.setAddAction(() -> components.getMixture().addSolution(new Solution()));
-		
-		return substancesSetting;
-	}
-
-	private SubstancesSettingItem substancesSettingItem(Solution solution) {
-		SubstancesSettingItem item = new SubstancesSettingItem(solution);
-		item.setSubstances(Substances.load());
-		
-		return item;
-	}
-
-	private Node substancesVolume() {
-		SubstancesVolume substancesVolume = new SubstancesVolume();
-		SubstancesVolumeTotal totalItem = new SubstancesVolumeTotal();
-
-		totalItem.setOnVolumeChange(components.getMixture()::setVolume);
-		
-		substancesVolume.setTotalPane(totalItem);
-
-		Consumer<Solution> addSolutionItem = solution -> {
-			substancesVolume.addItem(substancesVolumeItem(solution));
-			totalItem.addSolution(solution);
-		};
-		
-		components.getMixture().getSolutions().forEach(addSolutionItem);
-		components.getMixture().addAddListener(addSolutionItem);
-		
-		return substancesVolume;
-	}
-
-	private SubstancesVolumeItem substancesVolumeItem(Solution solution) {
-		return new SubstancesVolumeItem(solution);
+		return new MoleculesViewBuilder(components).getNode();
 	}
 
 	private Node substancesManager() {
