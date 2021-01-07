@@ -60,6 +60,7 @@ public class ViewBuilder {
 		MainWindowController controller = nac.getController();
 
 		controller.setMoleculesPane(moleculesUnit());
+		controller.setTotalPane(percentageUnit());
 		controller.setSubstancesPane(substancesManager());
 		controller.setChangeLanguage(changeLanguage);
 		
@@ -68,6 +69,10 @@ public class ViewBuilder {
 
 	private Node moleculesUnit() {
 		return new MoleculesViewBuilder(components).getNode();
+	}
+
+	private Node percentageUnit() {
+		return new PercentageViewBuilder(components).getNode();
 	}
 
 	private Node substancesManager() {

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root alignment="CENTER" styleClass="item" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefWidth="100.0" styleClass="valueUnit">
+         <children>
+            <Label minWidth="-Infinity" text="%name_" />
+            <TextField fx:id="nameField" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" styleClass="solutionVolume" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefWidth="100.0" styleClass="valueUnit">
+         <children>
+            <TextField fx:id="massField" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" promptText="0" styleClass="solutionVolume" />
+            <Label minWidth="-Infinity" text="mg" />
+         </children>
+      </HBox>
+      <TextField fx:id="proportionField" alignment="BOTTOM_LEFT" prefWidth="100.0" promptText="0" styleClass="solutionVolume" />
+      <HBox alignment="CENTER" prefWidth="100.0" styleClass="valueUnit">
+         <children>
+            <TextField fx:id="percentField" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" promptText="0" styleClass="solutionVolume" />
+            <Label minWidth="-Infinity" text="\%" />
+         </children>
+      </HBox>
+   </children>
+</fx:root>

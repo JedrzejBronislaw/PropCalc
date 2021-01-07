@@ -1,21 +1,40 @@
 package jedrzejbronislaw.propcalc.model.percent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Calc {
 	private static final int PERCENT_PRECISION = 1000000;
 
 	private List<Item> items = new ArrayList<>();
+	private List<Consumer<Item>> addListeners = new ArrayList<>();
 	
 	private ProportionController propCrtl = new ProportionController(items);
 
+
+
+	public void addAddListener(Consumer<Item> listener) {
+		addListeners.add(listener);
+	}
+	
+	private void callAddListeners(Item newItem) {
+		addListeners.forEach(l ->  l.accept(newItem));
+	}
+	
+	
 	public void addItem(Item item) {
 		item.addChangeMassListener(propCrtl::updateProportion);
 		item.addChangeProportionListener(propCrtl::updateMass);
 		
 		items.add(item);
 		propCrtl.updateMass();
+		callAddListeners(item);
+	}
+	
+	public List<Item> getItems() {
+		return Collections.unmodifiableList(items);
 	}
 	
 	public void setPercent(Item item, double percent) {

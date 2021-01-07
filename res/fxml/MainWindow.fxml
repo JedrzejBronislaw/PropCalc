@@ -49,7 +49,7 @@
                   <ScrollPane fx:id="moleculesPane" />
                </content>
           </Tab>
-          <Tab closable="false" disable="true" text="%percentage_of_the_total">
+          <Tab closable="false" text="%percentage_of_the_total">
                <content>
                   <ScrollPane fx:id="totalPane" />
                </content>
