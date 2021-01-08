@@ -2,16 +2,16 @@ package jedrzejbronislaw.propcalc.tools;
 
 public class RecursiveUpdate {
 
-	private Runnable beforeAction;
-	
+	private Runnable afterAction;
 	private boolean updating = false;
 	
 	
 	public RecursiveUpdate() {}
 
-	public RecursiveUpdate(Runnable beforeAction) {
-		this.beforeAction = beforeAction;
+	public RecursiveUpdate(Runnable afterAction) {
+		this.afterAction = afterAction;
 	}
+	
 	
 	public void update(Runnable updateAction) {
 		if (updating == true) {
@@ -20,7 +20,7 @@ public class RecursiveUpdate {
 			updating = true;
 			
 			Injection.run(updateAction);
-			Injection.run(beforeAction);
+			Injection.run(afterAction);
 			
 			updating = false;
 		}
