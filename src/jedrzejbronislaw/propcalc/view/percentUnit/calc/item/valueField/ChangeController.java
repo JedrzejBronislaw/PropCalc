@@ -1,17 +1,16 @@
 package jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField;
 
+import lombok.Getter;
+
 public class ChangeController {
-	private boolean permission = true;
 	
-	public void block() {
-		permission = false;
+	@Getter private boolean ongoing = false;
+	
+	public void start() {
+		ongoing = true;
 	}
 	
-	public void unblock() {
-		permission = true;
-	}
-	
-	public boolean permit() {
-		return permission;
+	public void end() {
+		ongoing = false;
 	}
 }

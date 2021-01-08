@@ -20,7 +20,7 @@ public abstract class ValueField {
 		this.regex = regex;
 		
 		textField.textProperty().addListener((o, oldV, newV) -> {
-			if (!internalChange.permit()) return;
+			if (internalChange.isOngoing()) return;
 			
 			if (isNewValue(newV, oldV))
 				Injection.run(settingValue);
@@ -30,9 +30,9 @@ public abstract class ValueField {
 	
 	private void internalFXChange(Runnable change) {
 		Platform.runLater(() -> {
-			internalChange.block();
+			internalChange.start();
 			Injection.run(change);
-			internalChange.unblock();
+			internalChange.end();
 		});
 	}
 
