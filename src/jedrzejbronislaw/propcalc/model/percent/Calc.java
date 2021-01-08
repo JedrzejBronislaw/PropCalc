@@ -40,7 +40,7 @@ public class Calc {
 		item.addChangeProportionListener(() -> recursiveUpdate.update(propCrtl::updateMass));
 		
 		items.add(item);
-		propCrtl.updateMass();
+		recursiveUpdate.update(propCrtl::updateMass);
 		callAddListeners(item);
 	}
 
@@ -52,12 +52,15 @@ public class Calc {
 		if (!items.contains(item)) throw new IllegalArgumentException("Item is not added.");
 		if (percent < 0) throw new IllegalArgumentException("Percent cannot be negative (" + percent + " < 0).");
 		if (items.size() < 2) throw new IllegalStateException("There is only one item.");
-		
-		if (items.size() == 2)
-			setPercent_twoItems(item, percent); else
-			setPercent_moreItems(item, percent);
-		
-		propCrtl.updateMass();
+
+		recursiveUpdate.update(() -> {
+			
+			if (items.size() == 2)
+				setPercent_twoItems(item, percent); else
+				setPercent_moreItems(item, percent);
+	
+			propCrtl.updateMass();
+		});
 	}
 
 	private void setPercent_twoItems(Item item, double percent) {
@@ -87,7 +90,7 @@ public class Calc {
 	public void setTotalMass(double totalMass) {
 		if (totalMass < 0) throw new IllegalArgumentException("Total mass cannot be negative (" + totalMass + " < 0).");
 		
-		propCrtl.updateMass(totalMass);
+		recursiveUpdate.update(() -> propCrtl.updateMass(totalMass));
 	}
 	
 	public double getPercent(Item item) {
