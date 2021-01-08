@@ -18,10 +18,10 @@ public class DoubleValueField extends ValueField {
 	}
 
 	public Double getDouble() {
-		if (textField.getText().isBlank()) return 0.0;
+		if (field.getText().isBlank()) return 0.0;
 		
 		try {
-			return Double.parseDouble(textField.getText());
+			return Double.parseDouble(field.getText());
 		} catch (NumberFormatException e) {
 			return null;
 		}

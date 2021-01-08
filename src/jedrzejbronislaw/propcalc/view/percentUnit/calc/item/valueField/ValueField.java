@@ -8,57 +8,45 @@ import lombok.Setter;
 
 public abstract class ValueField {
 
-	protected final TextField textField;
-	private final ChangeController internalChange;
-	private final String regex;
+	protected final TextField field;
+	private   final ChangeController internalChange;
+	private   final String regex;
+
 	@Setter private Runnable settingValue;
 
 	
-	public ValueField(@NonNull TextField textField, @NonNull ChangeController internalChange, @NonNull String regex) {
-		this.textField = textField;
-		this.internalChange = internalChange;
+	public ValueField(@NonNull TextField textField, @NonNull ChangeController changeController, @NonNull String regex) {
+		this.field = textField;
+		this.internalChange = changeController;
 		this.regex = regex;
 		
-		textField.textProperty().addListener((o, oldV, newV) -> {
+		field.textProperty().addListener((o, oldV, newV) -> {
 			if (internalChange.isOngoing()) return;
 			
-			if (isNewValue(newV, oldV))
-				Injection.run(settingValue);
+			if (isCorrectValue(newV))
+				Injection.run(settingValue); else
+				display(oldV);
 		});
 	}
 	
+
+	public void display(String value) {
+		internalFXChange(() -> {
+			int caret = field.getCaretPosition();
+			field.setText(value);
+			field.positionCaret(caret);
+		});
+	}
 	
-	private void internalFXChange(Runnable change) {
+	private void internalFXChange(Runnable changeAction) {
 		Platform.runLater(() -> {
 			internalChange.start();
-			Injection.run(change);
+			Injection.run(changeAction);
 			internalChange.end();
 		});
 	}
-
-	public void display(String volumeStr) {
-		internalFXChange(() -> {
-			int caret = textField.getCaretPosition();
-			
-			textField.setText(volumeStr);
-			
-			textField.positionCaret(caret);
-		});
-	}
-	
-	private boolean isNewValue(String newV, String oldV) {
-		if (isCorrectValue(newV))  return true;
-		
-		display(oldV);
-		return false;
-	}
 	
 	private boolean isCorrectValue(String value) {
-		if (value.isEmpty()) return true;
-		
-		if (!value.matches(regex))
-			return false;
-
-		return true;
+		return value.isEmpty() || value.matches(regex);
 	}
 }

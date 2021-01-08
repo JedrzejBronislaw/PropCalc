@@ -14,6 +14,6 @@ public class StringValueField extends ValueField {
 	
 	
 	public String getString() {
-		return textField.getText();
+		return field.getText();
 	}
 }

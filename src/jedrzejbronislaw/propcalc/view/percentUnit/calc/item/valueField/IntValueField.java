@@ -18,10 +18,10 @@ public class IntValueField extends ValueField {
 	}
 
 	public Integer getInt() {
-		if (textField.getText().isBlank()) return 0;
+		if (field.getText().isBlank()) return 0;
 		
 		try {
-			return Integer.parseInt(textField.getText());
+			return Integer.parseInt(field.getText());
 		} catch (NumberFormatException e) {
 			return null;
 		}
