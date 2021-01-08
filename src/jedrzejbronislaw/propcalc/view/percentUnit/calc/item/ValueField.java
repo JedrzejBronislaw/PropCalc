@@ -8,6 +8,7 @@ import lombok.Setter;
 
 public class ValueField {
 
+	public static final String INT_STRING = ".*";
 	public static final String DOUBLE_REGEX = "[0-9]+(\\.[0-9]*)?";
 	public static final String INT_REGEX = "[0-9]+";
 
@@ -106,5 +107,9 @@ public class ValueField {
 		} catch (NumberFormatException e) {
 			return null;
 		}
+	}
+
+	public String getString() {
+		return textField.getText();
 	}
 }
