@@ -50,7 +50,7 @@ public class CalcItem extends HBox implements Initializable {
 		prop.setSettingValue(() -> item.setProportion(prop.getInt()));
 		perc.setSettingValue(() -> calc.setPercent(item, perc.getDouble()));
 		
-		item.addChangeListener(this::update);
+		calc.addChangeListener(this::update);
 	}
 	
 	private void update() {

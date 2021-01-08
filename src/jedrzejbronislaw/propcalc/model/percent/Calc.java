@@ -10,6 +10,7 @@ public class Calc {
 
 	private List<Item> items = new ArrayList<>();
 	private List<Consumer<Item>> addListeners = new ArrayList<>();
+	private List<Runnable> changeListeners = new ArrayList<>();
 	
 	private ProportionController propCrtl = new ProportionController(items);
 
@@ -23,14 +24,50 @@ public class Calc {
 		addListeners.forEach(l ->  l.accept(newItem));
 	}
 	
+	public void addChangeListener(Runnable listener) {
+		changeListeners.add(listener);
+	}
+	
+	private void callChangeListeners() {
+		changeListeners.forEach(l ->  l.run());
+	}
+	
 	
 	public void addItem(Item item) {
-		item.addChangeMassListener(propCrtl::updateProportion);
-		item.addChangeProportionListener(propCrtl::updateMass);
+		item.addChangeMassListener(this::updateProportion);
+		item.addChangeProportionListener(this::updateMass);
 		
 		items.add(item);
 		propCrtl.updateMass();
 		callAddListeners(item);
+	}
+
+	boolean updating = false;
+	
+	private void updateMass() {
+		if (updating == true) {
+			propCrtl.updateMass();
+		} else {
+			updating = true;
+			
+			propCrtl.updateMass();
+			callChangeListeners();
+			
+			updating = false;
+		}
+	}
+
+	private void updateProportion() {
+		if (updating == true) {
+			propCrtl.updateProportion();
+		} else {
+			updating = true;
+
+			propCrtl.updateProportion();
+			callChangeListeners();
+			
+			updating = false;
+		}
 	}
 	
 	public List<Item> getItems() {
