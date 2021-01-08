@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import jedrzejbronislaw.propcalc.tools.RecursiveUpdate;
+
 public class Calc {
 	private static final int PERCENT_PRECISION = 1000000;
 
@@ -13,7 +15,7 @@ public class Calc {
 	private List<Runnable> changeListeners = new ArrayList<>();
 	
 	private ProportionController propCrtl = new ProportionController(items);
-
+	private RecursiveUpdate recursiveUpdate = new RecursiveUpdate(this::callChangeListeners);
 
 
 	public void addAddListener(Consumer<Item> listener) {
@@ -34,42 +36,14 @@ public class Calc {
 	
 	
 	public void addItem(Item item) {
-		item.addChangeMassListener(this::updateProportion);
-		item.addChangeProportionListener(this::updateMass);
+		item.addChangeMassListener(      () -> recursiveUpdate.update(propCrtl::updateProportion));
+		item.addChangeProportionListener(() -> recursiveUpdate.update(propCrtl::updateMass));
 		
 		items.add(item);
 		propCrtl.updateMass();
 		callAddListeners(item);
 	}
 
-	boolean updating = false;
-	
-	private void updateMass() {
-		if (updating == true) {
-			propCrtl.updateMass();
-		} else {
-			updating = true;
-			
-			propCrtl.updateMass();
-			callChangeListeners();
-			
-			updating = false;
-		}
-	}
-
-	private void updateProportion() {
-		if (updating == true) {
-			propCrtl.updateProportion();
-		} else {
-			updating = true;
-
-			propCrtl.updateProportion();
-			callChangeListeners();
-			
-			updating = false;
-		}
-	}
-	
 	public List<Item> getItems() {
 		return Collections.unmodifiableList(items);
 	}
