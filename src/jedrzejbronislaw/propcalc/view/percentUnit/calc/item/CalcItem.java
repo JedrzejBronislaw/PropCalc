@@ -10,7 +10,10 @@ import javafx.scene.layout.HBox;
 import jedrzejbronislaw.propcalc.model.percent.Calc;
 import jedrzejbronislaw.propcalc.model.percent.Item;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
-import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.ValueField.ChangeController;
+import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.ChangeController;
+import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.DoubleValueField;
+import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.IntValueField;
+import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.StringValueField;
 import lombok.NonNull;
 
 public class CalcItem extends HBox implements Initializable {
@@ -24,10 +27,10 @@ public class CalcItem extends HBox implements Initializable {
 	private final Calc calc;
 	
 	protected ChangeController changeController = new ChangeController();
-	private ValueField name;
-	private ValueField mass;
-	private ValueField prop;
-	private ValueField perc;
+	private StringValueField name;
+	private DoubleValueField mass;
+	private    IntValueField prop;
+	private DoubleValueField perc;
 	
 	public CalcItem(@NonNull Item item, @NonNull Calc calc) {
 		this.item = item;
@@ -39,14 +42,14 @@ public class CalcItem extends HBox implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		name = new ValueField(nameField,       changeController, ValueField.INT_STRING);
-		mass = new ValueField(massField,       changeController, ValueField.DOUBLE_REGEX);
-		prop = new ValueField(proportionField, changeController, ValueField.INT_REGEX);
-		perc = new ValueField(percentField,    changeController, ValueField.DOUBLE_REGEX);
+		name = new StringValueField(nameField,       changeController);
+		mass = new DoubleValueField(massField,       changeController);
+		prop = new    IntValueField(proportionField, changeController);
+		perc = new DoubleValueField(percentField,    changeController);
 
-		name.setSettingValue(() -> item.setName(name.getString()));
-		mass.setSettingValue(() -> item.setMass(mass.getDouble()));
-		prop.setSettingValue(() -> item.setProportion(prop.getInt()));
+		name.setSettingValue(() -> item.setName(         name.getString()));
+		mass.setSettingValue(() -> item.setMass(         mass.getDouble()));
+		prop.setSettingValue(() -> item.setProportion(   prop.getInt()));
 		perc.setSettingValue(() -> calc.setPercent(item, perc.getDouble()));
 		
 		calc.addChangeListener(this::update);
