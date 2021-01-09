@@ -36,10 +36,9 @@ public class ProportionController {
 		update(() -> {
 			
 			for(Item item : items)
-				item.setProportion((int)(item.getMass() * PROPORTION_PRECISION));
+				item.setProportion((int)(Math.round(item.getMass() * PROPORTION_PRECISION)));
 			
 			reduceProportion();
-			
 		});
 	}
 

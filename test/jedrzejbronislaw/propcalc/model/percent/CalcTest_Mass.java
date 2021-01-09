@@ -295,6 +295,26 @@ public class CalcTest_Mass {
 	}
 	
 	@Test
+	public void setMass_4_1() {
+		Item item1 = new Item(100, 1);
+		Item item2 = new Item(100, 1);
+		calc.addItem(item1);
+		calc.addItem(item2);
+		
+		item1.setMass(4.1);
+		item2.setMass(5.9);
+
+		assertEquals(41, item1.getProportion());
+		assertEquals(59, item2.getProportion());
+		
+		assertEquals(41, calc.getPercent(item1), 0.001);
+		assertEquals(59, calc.getPercent(item2), 0.001);
+		
+		assertEquals(4.1, item1.getMass(), 0.000001);
+		assertEquals(5.9, item2.getMass(), 0.000001);
+	}
+	
+	@Test
 	public void setMass_5AndHalf_initMass_100_100_100() {
 		Item item1 = new Item(100, 1);
 		Item item2 = new Item(100, 1);
