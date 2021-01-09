@@ -55,7 +55,7 @@ public class Item {
 	}
 	
 	public void setProportion(int proportion) {
-		if (proportion < 0) throw new IllegalArgumentException("Mass cannot be negative (" + proportion + " < 0).");
+		if (proportion < 0) throw new IllegalArgumentException("Proportion cannot be negative (" + proportion + " < 0).");
 		
 		this.proportion = proportion;
 		changeProportionListeners.forEach(l -> l.run());
