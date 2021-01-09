@@ -10,10 +10,10 @@ import javafx.scene.layout.HBox;
 import jedrzejbronislaw.propcalc.model.percent.Calc;
 import jedrzejbronislaw.propcalc.model.percent.Item;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
-import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.ChangeController;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.DoubleValueField;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.IntValueField;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.StringValueField;
+import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.ValueFieldFactory;
 import lombok.NonNull;
 
 public class CalcItem extends HBox implements Initializable {
@@ -26,7 +26,7 @@ public class CalcItem extends HBox implements Initializable {
 	private final Item item;
 	private final Calc calc;
 	
-	protected ChangeController changeController = new ChangeController();
+	private ValueFieldFactory fieldFactory = new ValueFieldFactory();
 	private StringValueField name;
 	private DoubleValueField mass;
 	private    IntValueField prop;
@@ -42,10 +42,10 @@ public class CalcItem extends HBox implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		name = new StringValueField(nameField,       changeController);
-		mass = new DoubleValueField(massField,       changeController);
-		prop = new    IntValueField(proportionField, changeController);
-		perc = new DoubleValueField(percentField,    changeController);
+		name = fieldFactory.createStringField(nameField);
+		mass = fieldFactory.createDoubleField(massField);
+		prop = fieldFactory.createIntField(proportionField);
+		perc = fieldFactory.createDoubleField(percentField);
 
 		name.setSettingValue(() -> item.setName(         name.getString()));
 		mass.setSettingValue(() -> item.setMass(         mass.getDouble()));
