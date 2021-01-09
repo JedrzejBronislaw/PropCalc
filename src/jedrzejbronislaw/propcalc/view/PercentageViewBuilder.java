@@ -38,7 +38,7 @@ public class PercentageViewBuilder {
 	}
 	
 	private Node buildCalcPane() {
-		Calc calc = new Calc();
+		Calc calc = new Calc(components.getCalc());
 		calc.setAddAction(() -> components.getCalc().addItem(new Item()));
 
 		addNewItemInCalcAction(item ->
