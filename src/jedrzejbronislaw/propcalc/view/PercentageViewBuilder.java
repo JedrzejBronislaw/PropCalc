@@ -8,7 +8,7 @@ import jedrzejbronislaw.propcalc.model.percent.Item;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader.NodeAndController;
 import jedrzejbronislaw.propcalc.view.percentUnit.PercentUnitController;
-import jedrzejbronislaw.propcalc.view.percentUnit.calc.Calc;
+import jedrzejbronislaw.propcalc.view.percentUnit.calc.CalcPane;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.CalcItem;
 import lombok.Getter;
 
@@ -38,14 +38,14 @@ public class PercentageViewBuilder {
 	}
 	
 	private Node buildCalcPane() {
-		Calc calc = new Calc(components.getCalc());
-		calc.setAddAction(() -> components.getCalc().addItem(new Item()));
+		CalcPane calcPane = new CalcPane(components.getCalc());
+		calcPane.setAddAction(() -> components.getCalc().addItem(new Item()));
 
 		addNewItemInCalcAction(item ->
-			calc.addItem(new CalcItem(item, components.getCalc()))
+			calcPane.addItem(new CalcItem(item, components.getCalc()))
 		);
 		
-		return calc;
+		return calcPane;
 	}
 
 

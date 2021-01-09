@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import jedrzejbronislaw.propcalc.model.percent.Calc;
 import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.CalcItem;
@@ -16,7 +17,7 @@ import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.DoubleVal
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.ValueFieldFactory;
 import lombok.Setter;
 
-public class Calc extends VBox implements Initializable {
+public class CalcPane extends VBox implements Initializable {
 
 	@FXML private VBox itemBox;
 	@FXML private Button addButton;
@@ -28,14 +29,14 @@ public class Calc extends VBox implements Initializable {
 	private ValueFieldFactory fieldFactory = new ValueFieldFactory();
 	private DoubleValueField massField;
 	
-	private jedrzejbronislaw.propcalc.model.percent.Calc calc;
+	private Calc calc;
 
 	public void addItem(CalcItem item) {
 		itemBox.getChildren().add(item);
 	}
 	
 	
-	public Calc(jedrzejbronislaw.propcalc.model.percent.Calc calc) {
+	public CalcPane(Calc calc) {
 		this.calc = calc;
 		MyFXMLLoader.create("percentUnit/Calc.fxml", this);
 		
