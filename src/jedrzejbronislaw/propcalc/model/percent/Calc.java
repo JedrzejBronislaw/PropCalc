@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import jedrzejbronislaw.propcalc.tools.RecursiveUpdate;
+import lombok.Getter;
 
 public class Calc {
 	private static final int PERCENT_PRECISION = 1000000;
@@ -16,6 +17,9 @@ public class Calc {
 	
 	private ProportionController propCrtl = new ProportionController(items);
 	private RecursiveUpdate recursiveUpdate = new RecursiveUpdate(this::callChangeListeners);
+	
+	@Getter
+	private final CalcOptions options = new CalcOptions();
 
 
 	public void addAddListener(Consumer<Item> listener) {
@@ -36,12 +40,23 @@ public class Calc {
 	
 	
 	public void addItem(Item item) {
-		item.addChangeMassListener(      () -> recursiveUpdate.update(propCrtl::updateProportion));
+		item.addChangeMassListener(      () -> changeMassListener(item));
 		item.addChangeProportionListener(() -> recursiveUpdate.update(propCrtl::updateMass));
 		
 		items.add(item);
 		recursiveUpdate.update(propCrtl::updateMass);
 		callAddListeners(item);
+	}
+
+	private void changeMassListener(Item item) {
+		recursiveUpdate.update(() -> {
+			
+			switch (options.getChangeMassAction()) {
+				case CHANGE_PROPORTIONS:  propCrtl.updateProportion(); break;
+				case CHANGE_OTHER_MASSES: propCrtl.updateMass(item);   break;
+			}
+			
+		});
 	}
 
 	public List<Item> getItems() {

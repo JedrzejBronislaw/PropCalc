@@ -31,6 +31,20 @@ public class ProportionController {
 
 		});
 	}
+
+	public void updateMass(Item lockItem) {
+		update(() -> {
+			
+			long lockProportion = lockItem.getProportion();
+			double lockMass = lockItem.getMass();
+			
+			double massFactor = (lockProportion == 0) ? 0 : lockMass / lockProportion;
+			
+			for(Item item : items)
+				item.setMass(item.getProportion() * massFactor);
+
+		});
+	}
 	
 	public void updateProportion() {
 		update(() -> {

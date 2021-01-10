@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import jedrzejbronislaw.propcalc.model.percent.CalcOptions.ChangeMassAction;
+
 public class CalcTest_getTotalMass {
 	
 	private Calc calc = new Calc();
@@ -57,15 +59,29 @@ public class CalcTest_getTotalMass {
 	}
 	
 	@Test
-	public void getTotalMass_twoItems_changeMass() {
+	public void getTotalMass_twoItems_changeMass1() {
 		Item item1 = new Item(100, 1);
 		Item item2 = new Item(200, 2);
+		calc.getOptions().setChangeMassAction(ChangeMassAction.CHANGE_PROPORTIONS);
 		calc.addItem(item1);
 		calc.addItem(item2);
 
 		item1.setMass(10);
 
 		assertEquals(210, calc.totalMass(), 0.000001);
+	}
+	
+	@Test
+	public void getTotalMass_twoItems_changeMass2() {
+		Item item1 = new Item(100, 1);
+		Item item2 = new Item(200, 2);
+		calc.getOptions().setChangeMassAction(ChangeMassAction.CHANGE_OTHER_MASSES);
+		calc.addItem(item1);
+		calc.addItem(item2);
+
+		item1.setMass(10);
+
+		assertEquals(30, calc.totalMass(), 0.000001);
 	}
 	
 	@Test
