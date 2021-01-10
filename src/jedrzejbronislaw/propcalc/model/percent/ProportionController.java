@@ -22,7 +22,7 @@ public class ProportionController {
 	public void updateMass(double totalMass) {
 		update(() -> {
 			
-			int totalProportion = totalProportion();
+			long totalProportion = totalProportion();
 			
 			for(Item item : items)
 				if (totalProportion == 0 || totalMass == 0)
@@ -36,7 +36,7 @@ public class ProportionController {
 		update(() -> {
 			
 			for(Item item : items)
-				item.setProportion((int)(Math.round(item.getMass() * PROPORTION_PRECISION)));
+				item.setProportion(Math.round(item.getMass() * PROPORTION_PRECISION));
 			
 			reduceProportion();
 		});
@@ -46,13 +46,13 @@ public class ProportionController {
 		return items.stream().mapToDouble(i -> i.getMass()).sum();
 	}
 	
-	private int totalProportion() {
-		return items.stream().mapToInt(item -> item.getProportion()).sum();
+	private long totalProportion() {
+		return items.stream().mapToLong(item -> item.getProportion()).sum();
 	}
 
 	public void reduceProportion() {
-		int[] proportions = items.stream().mapToInt(i -> i.getProportion()).toArray();
-		int gcd = GCD.gcd(proportions);
+		long[] proportions = items.stream().mapToLong(i -> i.getProportion()).toArray();
+		long gcd = GCD.gcd(proportions);
 		
 		items.forEach(i -> i.setProportion(i.getProportion() / gcd));
 	}

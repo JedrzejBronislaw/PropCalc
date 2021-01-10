@@ -1,24 +1,24 @@
 package jedrzejbronislaw.propcalc.tools;
 
-import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class GCD {
 	
-	public static int gcd(int a, int b) {
+	public static long gcd(long a, long b) {
 		if (a < 0) a = -a;
 		if (b < 0) b = -b;
 		
 		return euclid(a, b);
 	}
 	
-	public static int gcd(int... nums) {
+	public static long gcd(long... nums) {
 		if (nums==null ||nums.length == 0) throw new IllegalArgumentException("Lenght of nums have to be greater than 0.");
 		
-		nums = IntStream.of(nums).map(Math::abs).toArray();
+		nums = LongStream.of(nums).map(Math::abs).toArray();
 		nums = delZero(nums);
-		if (nums.length == 0) return 0;
+		if (nums.length == 0) return 0L;
 		
-		int min;
+		long min;
 		
 		while (nums.length > 1) {
 			min = min(nums);
@@ -34,7 +34,7 @@ public class GCD {
 		return nums[0];
 	}
 
-	private static int euclid(int a, int b) {
+	private static long euclid(long a, long b) {
 		while(true) {
 			if (a == 0) return b;
 			if (b == 0) return a;
@@ -45,15 +45,15 @@ public class GCD {
 		}
 	}
 	
-	private static int[] delZero(int[] tab) {
-		return IntStream.of(tab).filter(i -> i!=0).toArray();
+	private static long[] delZero(long[] tab) {
+		return LongStream.of(tab).filter(i -> i!=0).toArray();
 	}
 
-	private static int[] delDuplicate(int[] tab) {
-		return IntStream.of(tab).distinct().toArray();
+	private static long[] delDuplicate(long[] tab) {
+		return LongStream.of(tab).distinct().toArray();
 	}
 
-	private static int min(int[] tab) {
-		return IntStream.of(tab).min().getAsInt();
+	private static long min(long[] tab) {
+		return LongStream.of(tab).min().getAsLong();
 	}
 }

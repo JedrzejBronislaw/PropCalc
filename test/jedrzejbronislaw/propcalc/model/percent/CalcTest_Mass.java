@@ -128,7 +128,7 @@ public class CalcTest_Mass {
 	}
 
 	@Test
-	public void setMass_1000000_1000000() {
+	public void setMass_bigValues_1000000_1000000() {
 		Item item1 = new Item(100, 1);
 		Item item2 = new Item(100, 1);
 		calc.addItem(item1);
@@ -145,6 +145,26 @@ public class CalcTest_Mass {
 		
 		assertEquals(1000000, item1.getMass(), 0.000001);
 		assertEquals(1000000, item2.getMass(), 0.000001);
+	}
+
+	@Test
+	public void setMass_bigDifferentValues_1000000_3000000() {
+		Item item1 = new Item(100, 1);
+		Item item2 = new Item(100, 1);
+		calc.addItem(item1);
+		calc.addItem(item2);
+		
+		item1.setMass(1000000);
+		item2.setMass(3000000);
+
+		assertEquals(1, item1.getProportion());
+		assertEquals(3, item2.getProportion());
+		
+		assertEquals(25, calc.getPercent(item1), 0.000001);
+		assertEquals(75, calc.getPercent(item2), 0.000001);
+		
+		assertEquals(1000000, item1.getMass(), 0.000001);
+		assertEquals(3000000, item2.getMass(), 0.000001);
 	}
 
 	//three items

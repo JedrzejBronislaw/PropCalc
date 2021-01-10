@@ -104,7 +104,7 @@ public class Calc {
 		return items.stream().mapToDouble(item -> item.getMass()).sum();
 	}
 	
-	public int totalProportion() {
-		return items.stream().mapToInt(item -> item.getProportion()).sum();
+	public long totalProportion() {
+		return items.stream().mapToLong(item -> item.getProportion()).sum();
 	}
 }

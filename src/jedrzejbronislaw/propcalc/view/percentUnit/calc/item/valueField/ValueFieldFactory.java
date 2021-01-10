@@ -15,6 +15,10 @@ public class ValueFieldFactory {
 		return new IntValueField(textField, changeController);
 	}
 	
+	public LongValueField createLongField(@NonNull TextField textField) {
+		return new LongValueField(textField, changeController);
+	}
+	
 	public DoubleValueField createDoubleField(@NonNull TextField textField) {
 		return new DoubleValueField(textField, changeController);
 	}

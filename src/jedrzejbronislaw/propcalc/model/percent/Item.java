@@ -14,7 +14,7 @@ public class Item {
 	@NonNull
 	private String name = "";
 	private double mass;
-	private int proportion;
+	private long   proportion;
 
 
 	private List<Runnable> changeListeners = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Item {
 		changeListeners.forEach(l -> l.run());
 	}
 	
-	public void setProportion(int proportion) {
+	public void setProportion(long proportion) {
 		if (proportion < 0) throw new IllegalArgumentException("Proportion cannot be negative (" + proportion + " < 0).");
 		
 		this.proportion = proportion;

@@ -11,7 +11,7 @@ import jedrzejbronislaw.propcalc.model.percent.Calc;
 import jedrzejbronislaw.propcalc.model.percent.Item;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.DoubleValueField;
-import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.IntValueField;
+import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.LongValueField;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.StringValueField;
 import jedrzejbronislaw.propcalc.view.percentUnit.calc.item.valueField.ValueFieldFactory;
 import lombok.NonNull;
@@ -29,7 +29,7 @@ public class CalcItem extends HBox implements Initializable {
 	private ValueFieldFactory fieldFactory = new ValueFieldFactory();
 	private StringValueField name;
 	private DoubleValueField mass;
-	private    IntValueField prop;
+	private   LongValueField prop;
 	private DoubleValueField perc;
 	
 	public CalcItem(@NonNull Item item, @NonNull Calc calc) {
@@ -44,7 +44,7 @@ public class CalcItem extends HBox implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		name = fieldFactory.createStringField(nameField);
 		mass = fieldFactory.createDoubleField(massField);
-		prop = fieldFactory.createIntField(proportionField);
+		prop = fieldFactory.createLongField(proportionField);
 		perc = fieldFactory.createDoubleField(percentField);
 
 		name.setSettingValue(() -> item.setName(         name.getString()));
