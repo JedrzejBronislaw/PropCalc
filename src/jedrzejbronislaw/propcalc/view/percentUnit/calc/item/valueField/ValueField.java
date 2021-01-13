@@ -21,12 +21,22 @@ public abstract class ValueField {
 		this.regex = regex;
 		
 		field.textProperty().addListener((o, oldV, newV) -> {
-			if (internalChange.isOngoing()) return;
+			if (!internalChange.isOngoing()) setValue(oldV, newV);
+		});
+	}
+
+
+	private void setValue(String oldV, String newV) {
+		try {
 			
 			if (isCorrectValue(newV))
 				Injection.run(settingValue); else
 				display(oldV);
-		});
+			
+		} catch(IllegalArgumentException | IllegalStateException e) {
+			e.printStackTrace();
+			display(oldV);
+		}
 	}
 	
 
