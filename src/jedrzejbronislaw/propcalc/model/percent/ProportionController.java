@@ -15,11 +15,11 @@ public class ProportionController {
 	private final List<Item> items;
 
 	
-	public void updateMass() {
-		updateMass(totalMass());
+	public void updateMasses() {
+		updateMasses(totalMass());
 	}
 
-	public void updateMass(double totalMass) {
+	public void updateMasses(double totalMass) {
 		update(() -> {
 			
 			long totalProportion = totalProportion();
@@ -32,7 +32,25 @@ public class ProportionController {
 		});
 	}
 
-	public void updateMass(Item lockItem) {
+	public void updateMass(Item item) {
+		update(() -> {
+			
+			if (items.size() == 1) {
+				if (item.getProportion() == 0) item.setMass(0);
+				return;
+			}
+			
+			long proportion = totalProportion() - item.getProportion();
+			double mass     = totalMass()       - item.getMass();
+			
+			double massFactor = (proportion == 0) ? 0 : mass / proportion;
+
+			item.setMass(item.getProportion() * massFactor);
+
+		});
+	}
+
+	public void updateMassesExcept(Item lockItem) {
 		update(() -> {
 			
 			long lockProportion = lockItem.getProportion();

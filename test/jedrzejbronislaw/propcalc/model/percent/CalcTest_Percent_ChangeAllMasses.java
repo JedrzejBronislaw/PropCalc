@@ -2,11 +2,19 @@ package jedrzejbronislaw.propcalc.model.percent;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-public class CalcTest_Percent {
+import jedrzejbronislaw.propcalc.model.percent.CalcOptions.ChangeProportionAction;
+
+public class CalcTest_Percent_ChangeAllMasses {
 	
 	private Calc calc = new Calc();
+
+	@Before
+	public void prepare() {
+		calc.getOptions().setChangeProportionAction(ChangeProportionAction.CHANGE_ALL_MASSES);
+	}
 	
 	//percent
 

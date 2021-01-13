@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import jedrzejbronislaw.propcalc.model.percent.CalcOptions.ChangeProportionAction;
 import jedrzejbronislaw.propcalc.tools.RecursiveUpdate;
 import lombok.Getter;
 
@@ -41,10 +42,10 @@ public class Calc {
 	
 	public void addItem(Item item) {
 		item.addChangeMassListener(      () -> changeMassListener(item));
-		item.addChangeProportionListener(() -> recursiveUpdate.update(propCrtl::updateMass));
+		item.addChangeProportionListener(() -> changeProportionListener(item));
 		
 		items.add(item);
-		recursiveUpdate.update(propCrtl::updateMass);
+		recursiveUpdate.update(propCrtl::updateMasses);
 		callAddListeners(item);
 	}
 
@@ -52,8 +53,19 @@ public class Calc {
 		recursiveUpdate.update(() -> {
 			
 			switch (options.getChangeMassAction()) {
-				case CHANGE_PROPORTIONS:  propCrtl.updateProportion(); break;
-				case CHANGE_OTHER_MASSES: propCrtl.updateMass(item);   break;
+				case CHANGE_PROPORTIONS:  propCrtl.updateProportion();       break;
+				case CHANGE_OTHER_MASSES: propCrtl.updateMassesExcept(item); break;
+			}
+			
+		});
+	}
+
+	private void changeProportionListener(Item item) {
+		recursiveUpdate.update(() -> {
+			
+			switch (options.getChangeProportionAction()) {
+				case CHANGE_ALL_MASSES: propCrtl.updateMasses();   break;
+				case CHANGE_ONE_MASS:   propCrtl.updateMass(item); break;
 			}
 			
 		});
@@ -69,12 +81,16 @@ public class Calc {
 		if (items.size() < 2) throw new IllegalStateException("There is only one item.");
 
 		recursiveUpdate.update(() -> {
+			ChangeProportionAction oldChangeProportionAction = options.getChangeProportionAction();
+			options.setChangeProportionAction(ChangeProportionAction.CHANGE_ALL_MASSES);
 			
 			if (items.size() == 2)
 				setPercent_twoItems(item, percent); else
 				setPercent_moreItems(item, percent);
 	
-			propCrtl.updateMass();
+			propCrtl.updateMasses();
+			
+			options.setChangeProportionAction(oldChangeProportionAction);
 		});
 	}
 
@@ -105,7 +121,7 @@ public class Calc {
 	public void setTotalMass(double totalMass) {
 		if (totalMass < 0) throw new IllegalArgumentException("Total mass cannot be negative (" + totalMass + " < 0).");
 		
-		recursiveUpdate.update(() -> propCrtl.updateMass(totalMass));
+		recursiveUpdate.update(() -> propCrtl.updateMasses(totalMass));
 	}
 	
 	public double getPercent(Item item) {

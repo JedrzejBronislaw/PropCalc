@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import jedrzejbronislaw.propcalc.model.percent.CalcOptions.ChangeMassAction;
+import jedrzejbronislaw.propcalc.model.percent.CalcOptions.ChangeProportionAction;
 
 public class CalcTest_getTotalMass {
 	
@@ -85,9 +86,10 @@ public class CalcTest_getTotalMass {
 	}
 	
 	@Test
-	public void getTotalMass_twoItems_changeProportion() {
+	public void getTotalMass_twoItems_changeProportion_option1() {
 		Item item1 = new Item(100, 1);
 		Item item2 = new Item(100, 1);
+		calc.getOptions().setChangeProportionAction(ChangeProportionAction.CHANGE_ALL_MASSES);
 		calc.addItem(item1);
 		calc.addItem(item2);
 
@@ -97,15 +99,42 @@ public class CalcTest_getTotalMass {
 	}
 	
 	@Test
-	public void getTotalMass_twoItems_changeProportion0() {
+	public void getTotalMass_twoItems_changeProportion_option2() {
 		Item item1 = new Item(100, 1);
 		Item item2 = new Item(100, 1);
+		calc.getOptions().setChangeProportionAction(ChangeProportionAction.CHANGE_ONE_MASS);
+		calc.addItem(item1);
+		calc.addItem(item2);
+
+		item1.setProportion(2);
+
+		assertEquals(300, calc.totalMass(), 0.000001);
+	}
+	
+	@Test
+	public void getTotalMass_twoItems_changeProportion0_option1() {
+		Item item1 = new Item(100, 1);
+		Item item2 = new Item(100, 1);
+		calc.getOptions().setChangeProportionAction(ChangeProportionAction.CHANGE_ALL_MASSES);
 		calc.addItem(item1);
 		calc.addItem(item2);
 
 		item1.setProportion(0);
 
 		assertEquals(200, calc.totalMass(), 0.000001);
+	}
+	
+	@Test
+	public void getTotalMass_twoItems_changeProportion0_option2() {
+		Item item1 = new Item(100, 1);
+		Item item2 = new Item(100, 1);
+		calc.getOptions().setChangeProportionAction(ChangeProportionAction.CHANGE_ONE_MASS);
+		calc.addItem(item1);
+		calc.addItem(item2);
+
+		item1.setProportion(0);
+
+		assertEquals(100, calc.totalMass(), 0.000001);
 	}
 	
 	@Test
