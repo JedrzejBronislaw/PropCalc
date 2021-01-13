@@ -77,7 +77,8 @@ public class Calc {
 	
 	public void setPercent(Item item, double percent) {
 		if (!items.contains(item)) throw new IllegalArgumentException("Item is not added.");
-		if (percent < 0) throw new IllegalArgumentException("Percent cannot be negative (" + percent + " < 0).");
+		if (percent <   0) throw new IllegalArgumentException("Percent cannot be negative (" + percent + " < 0).");
+		if (percent > 100) throw new IllegalArgumentException("Percent cannot be greater than 100 (" + percent + " > 100).");
 		if (items.size() < 2) throw new IllegalStateException("There is only one item.");
 
 		recursiveUpdate.update(() -> {
