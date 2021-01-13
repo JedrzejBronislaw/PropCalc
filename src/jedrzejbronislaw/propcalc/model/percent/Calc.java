@@ -89,8 +89,6 @@ public class Calc {
 				setPercent_twoItems(item, percent); else
 				setPercent_moreItems(item, percent);
 	
-			propCrtl.updateMasses();
-			
 			options.setChangeProportionAction(oldChangeProportionAction);
 		});
 	}
