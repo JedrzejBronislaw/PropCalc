@@ -31,6 +31,7 @@ public class PercentageViewBuilder {
 
 		PercentUnitController controller = nac.getController();
 		controller.addNode(buildCalcPane());
+		controller.setCalcOptions(components.getCalc().getOptions());
 //		controller.setClipboard(new Clipboard(components.getCalc()));
 		
 		node = nac.getNode();

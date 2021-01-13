@@ -7,12 +7,12 @@ import lombok.Setter;
 @Setter
 public class CalcOptions {
 
-	enum ChangeMassAction {
+	public enum ChangeMassAction {
 		CHANGE_PROPORTIONS,
 		CHANGE_OTHER_MASSES
 	}
 
-	enum ChangeProportionAction {
+	public enum ChangeProportionAction {
 		CHANGE_ALL_MASSES,
 		CHANGE_ONE_MASS
 	}

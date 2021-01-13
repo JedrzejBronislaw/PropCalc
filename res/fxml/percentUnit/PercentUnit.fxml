@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="35.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.percentUnit.PercentUnitController">
+<VBox fx:id="rootBox" spacing="35.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jedrzejbronislaw.propcalc.view.percentUnit.PercentUnitController">
    <children>
       <VBox fx:id="mainBox" spacing="25.0" />
       <HBox alignment="TOP_RIGHT" spacing="10.0">
