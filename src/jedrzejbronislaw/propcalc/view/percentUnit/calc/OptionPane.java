@@ -13,12 +13,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import jedrzejbronislaw.propcalc.lang.Internationalization;
 import jedrzejbronislaw.propcalc.tools.Injection;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
 import lombok.Setter;
 
 public class OptionPane extends VBox implements Initializable {
 
+	private static final String NAME_PREFIX = "calcoption.";
+	
 	@FXML private Label nameLabel;
 	@FXML private VBox  valuesBox;
 	
@@ -47,16 +50,16 @@ public class OptionPane extends VBox implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		nameLabel.setText(name);
+		nameLabel.setText(Internationalization.get(NAME_PREFIX + name));
 		
 		for (String option : options)
 			valuesBox.getChildren().add(createRadioButton(option));
 	}
 
 	private RadioButton createRadioButton(String optionName) {
-		RadioButton button = new RadioButton(optionName);
+		RadioButton button = new RadioButton(Internationalization.get(NAME_PREFIX + optionName));
 		button.setToggleGroup(toggleGroup);
-		button.setOnAction(e -> Injection.run(onChangeAction, button.getText()));
+		button.setOnAction(e -> Injection.run(onChangeAction, optionName));
 		
 		buttons.put(optionName, button);
 		

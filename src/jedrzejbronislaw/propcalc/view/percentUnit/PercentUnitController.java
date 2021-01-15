@@ -58,8 +58,8 @@ public class PercentUnitController implements Initializable {
 		List<String> changeMassOptions = Stream.of(CalcOptions.ChangeMassAction      .values()).map(o -> o.toString()).collect(Collectors.toList());
 		List<String> changePropOptions = Stream.of(CalcOptions.ChangeProportionAction.values()).map(o -> o.toString()).collect(Collectors.toList());
 		
-		massOption = new OptionPane("Change Mass",       changeMassOptions);
-		propOption = new OptionPane("Change Proportion", changePropOptions);
+		massOption = new OptionPane("change_mass", changeMassOptions);
+		propOption = new OptionPane("change_prop", changePropOptions);
 		
 		rootBox.getChildren().add(massOption);
 		rootBox.getChildren().add(propOption);
