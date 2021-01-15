@@ -14,16 +14,22 @@ public class DoubleValueField extends ValueField {
 	
 	
 	public void display(double value) {
-		display(Double.toString(value));
+		display(Double.toString(round(value)));
 	}
 
 	public Double getDouble() {
 		if (field.getText().isBlank()) return 0.0;
 		
 		try {
-			return Double.parseDouble(field.getText());
+			return round(Double.parseDouble(field.getText()));
 		} catch (NumberFormatException e) {
 			return null;
 		}
+	}
+
+	private double round(double value) {
+		value = value * 1000;
+		long temp = Math.round(value);
+		return temp / 1000.0;
 	}
 }
