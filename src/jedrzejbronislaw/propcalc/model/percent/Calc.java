@@ -75,6 +75,10 @@ public class Calc {
 		return Collections.unmodifiableList(items);
 	}
 	
+	public void clear() {
+		items.forEach(i -> i.setProportion(0));
+	}
+	
 	public void setPercent(Item item, double percent) {
 		if (!items.contains(item)) throw new IllegalArgumentException("Item is not added.");
 		if (percent <   0) throw new IllegalArgumentException("Percent cannot be negative (" + percent + " < 0).");

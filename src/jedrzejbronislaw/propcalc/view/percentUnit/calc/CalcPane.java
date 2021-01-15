@@ -21,6 +21,7 @@ public class CalcPane extends VBox implements Initializable {
 
 	@FXML private VBox itemBox;
 	@FXML private Button addButton;
+	@FXML private Button clearButton;
 	@FXML private TextField totalMassField;
 	@FXML private Label     totalProportionLabel;
 	
@@ -45,7 +46,8 @@ public class CalcPane extends VBox implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		addButton.setOnAction(e -> Injection.run(addAction));
+		addButton.  setOnAction(e -> Injection.run(addAction));
+		clearButton.setOnAction(e -> calc.clear());
 		massField = fieldFactory.createDoubleField(totalMassField);
 		
 		massField.setSettingValue(() -> calc.setTotalMass(massField.getDouble()));

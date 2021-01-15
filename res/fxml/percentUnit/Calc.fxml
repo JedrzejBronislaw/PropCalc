@@ -55,6 +55,14 @@
             <Label alignment="CENTER_RIGHT" prefWidth="100.0" text="100 %" />
          </children>
       </HBox>
-      <Button fx:id="addButton" mnemonicParsing="false" text="+" />
+      <HBox spacing="10.0">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" text="+" />
+            <Button fx:id="clearButton" mnemonicParsing="false" text="%clear" />
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </HBox>
    </children>
 </fx:root>
