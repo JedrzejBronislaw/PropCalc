@@ -10,7 +10,7 @@
       <VBox fx:id="mainBox" spacing="25.0" />
       <HBox alignment="TOP_RIGHT" spacing="10.0">
          <children>
-            <Button disable="true" mnemonicParsing="false" onAction="#copyToClipboard" text="%copy_to_clipboard" />
+            <Button mnemonicParsing="false" onAction="#copyToClipboard" text="%copy_to_clipboard" />
          </children>
       </HBox>
    </children>

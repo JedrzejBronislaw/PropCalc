@@ -3,6 +3,7 @@ package jedrzejbronislaw.propcalc.view;
 import java.util.function.Consumer;
 
 import javafx.scene.Node;
+import jedrzejbronislaw.propcalc.components.CalcClipboard;
 import jedrzejbronislaw.propcalc.components.Components;
 import jedrzejbronislaw.propcalc.model.percent.Item;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
@@ -32,7 +33,7 @@ public class PercentageViewBuilder {
 		PercentUnitController controller = nac.getController();
 		controller.addNode(buildCalcPane());
 		controller.setCalcOptions(components.getCalc().getOptions());
-//		controller.setClipboard(new Clipboard(components.getCalc()));
+		controller.setClipboard(new CalcClipboard(components.getCalc()));
 		
 		node = nac.getNode();
 		return node;
