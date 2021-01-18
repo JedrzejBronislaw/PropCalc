@@ -4,91 +4,47 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.text.DecimalFormat;
 
-import jedrzejbronislaw.propcalc.model.molecules.Mixture;
-import jedrzejbronislaw.propcalc.model.molecules.Solution;
-import lombok.RequiredArgsConstructor;
+public abstract class Clipboard {
 
-@RequiredArgsConstructor
-public class Clipboard {
-
-	private static final DecimalFormat volumeFormat = new DecimalFormat("#.###");
-	private static final DecimalFormat massOfSubstanceFormat = new DecimalFormat("#.###");
-	private static final DecimalFormat numberOfMoleculesFormat = new DecimalFormat("#.###E0");
+	protected static final DecimalFormat      FLOAT_FORMAT = new DecimalFormat("#.###");
+	protected static final DecimalFormat SCIENTIFIC_FORMAT = new DecimalFormat("#.###E0");
 
 	private static final String LINE_SEPARATOR = "\n";
-	private static final String SEPARATOR = "\t";
+	private static final String SEPARATOR      = "\t";
 	
-	
-	private final Mixture mixture;
 	private StringBuffer buffer = new StringBuffer();
 	
+
+	protected abstract void header();
+	protected abstract void body();
+	protected abstract void total();
 	
 	public void save() {
 		buffer = new StringBuffer();
 		
 		header();
-		mixture.getSolutions().forEach(this::record);
+		body();
 		newLine();
 		total();
 		
 		saveToClipboard(buffer.toString());
 	}
 
-	private void total() {
-		double volume, mass , number;
-
-		volume = mass = number = 0.0;
-		
-		for(Solution solution : mixture.getSolutions()) {
-			volume += solution.getVolume();
-			mass   += solution.massOfSubstance();
-			number += solution.numberOfMolecules();
-		}	
-		
-		value("TOTAL");
-		value();
-		value();
-		value(volumeFormat.format(volume));
-		value(massOfSubstanceFormat.format(mass));
-		value(numberOfMoleculesFormat.format(number));
-	}
-
-	private void record(Solution solution) {
-		value(solution.getSubstance().getName());
-		value(solution.getConcentration());
-		value(solution.getProportion());
-		value(volumeFormat.format(solution.getVolume()));
-		value(massOfSubstanceFormat.format(solution.massOfSubstance()));
-		value(numberOfMoleculesFormat.format(solution.numberOfMolecules()));
-		newLine();
-	}
-	
-	private void header() {
-		value("Name");
-		value("Concentration [mg/ml]");
-		value("Ratio");
-		value("Volume [ml]");
-		value("Mass of substance [mg]");
-		value("Number of molecules");
-		newLine();
-	}
-	
-
-	private void newLine() {
+	protected void newLine() {
 		buffer.append(LINE_SEPARATOR);
 	}
 	
-	private void value(String text) {
+	protected void value(String text) {
 		buffer.append(text);
 		value();
 	}
 	
-	private void value(double val) {
+	protected void value(double val) {
 		buffer.append(val);
 		value();
 	}
 	
-	private void value() {
+	protected void value() {
 		buffer.append(SEPARATOR);
 	}
 

@@ -3,8 +3,8 @@ package jedrzejbronislaw.propcalc.view;
 import java.util.function.Consumer;
 
 import javafx.scene.Node;
-import jedrzejbronislaw.propcalc.components.Clipboard;
 import jedrzejbronislaw.propcalc.components.Components;
+import jedrzejbronislaw.propcalc.components.MixtureClipboard;
 import jedrzejbronislaw.propcalc.model.molecules.Solution;
 import jedrzejbronislaw.propcalc.model.molecules.substances.Substances;
 import jedrzejbronislaw.propcalc.tools.MyFXMLLoader;
@@ -37,7 +37,7 @@ public class MoleculesViewBuilder {
 		MoleculesUnitController controller = nac.getController();
 		controller.addNode(buildSettingsPane());
 		controller.addNode(buildVolumePane());
-		controller.setClipboard(new Clipboard(components.getMixture()));
+		controller.setClipboard(new MixtureClipboard(components.getMixture()));
 		
 		node = nac.getNode();
 		return node;
