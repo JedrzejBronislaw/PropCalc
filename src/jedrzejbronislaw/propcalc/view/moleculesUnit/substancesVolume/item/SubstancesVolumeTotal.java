@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
+import jedrzejbronislaw.propcalc.lang.Internationalization;
 import jedrzejbronislaw.propcalc.model.molecules.Solution;
 import jedrzejbronislaw.propcalc.tools.Injection;
 import lombok.Setter;
 
 public class SubstancesVolumeTotal extends SubstancesVolumeItem {
-
-	private static final String NAME_LABEL = "TOTAL:";
 	
 	private final List<Solution> solutions = new ArrayList<>();
 	@Setter
@@ -46,7 +45,7 @@ public class SubstancesVolumeTotal extends SubstancesVolumeItem {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setToolTips();
-		nameLabel.setText(NAME_LABEL);
+		nameLabel.setText(Internationalization.get("total_"));
 		
 		volumeField.textProperty().addListener((o, oldV, newV) -> {
 			if (internalChange) return;

@@ -44,7 +44,7 @@
          </VBox.margin></VBox>
       <HBox alignment="CENTER_LEFT" styleClass="item">
          <children>
-            <Label alignment="CENTER_RIGHT" prefWidth="100.0" text="TOTAL:" />
+            <Label alignment="CENTER_RIGHT" prefWidth="100.0" text="%total_" />
             <HBox alignment="CENTER_RIGHT" prefWidth="100.0" styleClass="valueUnit">
                <children>
                   <TextField fx:id="totalMassField" />
